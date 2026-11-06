@@ -37,6 +37,6 @@
   "official_portal": "https://pmkisan.gov.in",
   "source_document": "PM-KISAN Operational Guidelines, revised 29.03.2020 (uploaded RevisedPM-KISANOperationalGuidelines_English_.pdf)",
   "last_verified": "2026-11-06",
-  "status": "verified_against_uploaded_guideline",
+  "status": "checked_against_uploaded_guideline",
   "open_items": ["Confirm current portal registration steps; the guideline is from 2020 and the portal may have changed"]
 }
