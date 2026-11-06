@@ -1,7 +1,7 @@
 # JanSeva AI – Scope (frozen 6 Nov 2026)
 
 Rule: anything not marked MUST is not built before 10 Nov.
-Scheme coverage: five central schemes (PMS-SC, PM-USP CSSS, NMMSS, PM-KISAN, PMFBY). Telangana schemes are out of scope for this build.
+Scheme coverage: five central schemes (PMS-SC, PM-USP CSSS, NMMSS, PM-KISAN, PMFBY). State-level schemes can be added later as data files without code changes.
 ## MUST (demo depends on these)
 - Voice and text input, with text fallback if mic or speech fails
 - Telugu and English interface, Telugu-English code-mixed input

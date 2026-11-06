@@ -17,4 +17,6 @@ A voice-first assistant that helps Indian citizens find government schemes, chec
 3. See docs/scope.md, docs/api-contract.md and docs/gnani-integration.md.
 
 ## Status
-Scheme records marked "verified_against_uploaded_guideline" have been checked against the official PDF. The Telangana ePASS records are not yet verified and must not be shown as verified.
+Scheme records with status "checked_against_uploaded_guideline" have been checked against the official guideline PDF. Each record lists its open items. Do not present a scheme as fully verified until its open items are closed.
+
+Current scheme set: five central schemes (PMS-SC, PM-USP CSSS, NMMSS, PM-KISAN, PMFBY). State-level schemes can be added later as data files without code changes.
