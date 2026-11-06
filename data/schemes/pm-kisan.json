@@ -1,0 +1,42 @@
+{
+  "scheme_id": "pm-kisan",
+  "scheme_name": "Pradhan Mantri Kisan Samman Nidhi (PM-KISAN)",
+  "state": "central",
+  "issuing_authority": "Department of Agriculture, Cooperation and Farmers' Welfare (DAC&FW), Ministry of Agriculture and Farmers' Welfare, Government of India",
+  "target_group": "Landholding farmer families (husband, wife and minor children) who own cultivable land as per state land records",
+  "eligibility_rules": [
+    {"id": "land_in_records", "description": "Owns cultivable land, and the name is entered in the state land records", "field": "owns_cultivable_land_in_records", "operator": "equals", "value": true, "source_para": "3, 5.1"},
+    {"id": "not_institutional", "description": "Not an institutional landholder", "field": "institutional_landholder", "operator": "equals", "value": false, "source_para": "4.1(a)"},
+    {"id": "no_income_tax", "description": "No family member paid income tax in the last assessment year", "field": "paid_income_tax_last_year", "operator": "equals", "value": false, "source_para": "4.1(b)(v)"},
+    {"id": "no_constitutional_or_elected_post", "description": "No family member holds or has held a constitutional post, minister, MP, MLA, MLC, mayor or district panchayat chairperson", "field": "holds_or_held_such_post", "operator": "equals", "value": false, "source_para": "4.1(b)(i), (ii)"},
+    {"id": "no_govt_employment", "description": "No family member is a serving or retired government, PSU, autonomous institution or regular local body employee (Class IV, Group D and multi-tasking staff excepted)", "field": "govt_or_psu_employee_or_retired", "operator": "equals", "value": false, "source_para": "4.1(b)(iii)"},
+    {"id": "pension_limit", "description": "No retired pensioner receiving Rs 10,000 or more per month (Class IV, Group D and multi-tasking staff excepted)", "field": "monthly_pension", "operator": "lt", "value": 10000, "source_para": "4.1(b)(iv)"},
+    {"id": "not_professional", "description": "No family member is a registered doctor, engineer, lawyer, chartered accountant or architect practising", "field": "registered_professional", "operator": "equals", "value": false, "source_para": "4.1(b)(vi)"},
+    {"id": "not_nri", "description": "Not an NRI (applies to new beneficiaries)", "field": "is_nri", "operator": "equals", "value": false, "source_para": "4.1(c)"},
+    {"id": "ownership_cutoff", "description": "Ownership as of 01.02.2019 (inheritance by death is an exception)", "field": "owned_land_on_2019_02_01", "operator": "equals", "value": true, "source_para": "5.2, 5.3.3", "note": "Hard to self-check; state officials verify"}
+  ],
+  "benefits": [
+    {"component": "Income support by DBT to the Aadhaar-seeded bank account", "amount_per_year": 6000, "instalments": "3 instalments of Rs 2,000 every four months (April-July, August-November, December-March)", "source_para": "10.1"}
+  ],
+  "required_documents": [
+    "Aadhaar number (needed for payment; exemptions for Assam, Meghalaya and J&K until 31.03.2021)",
+    "Bank account number and IFSC code, Aadhaar-seeded (essential portal attributes)",
+    "Land record details: survey or khata number and khasra number (optional on portal)",
+    "Self-declaration of exclusions (para 4.2)",
+    "Mobile number (optional, for SMS alerts)"
+  ],
+  "application_steps": [
+    "Check whether your name is already on the beneficiary list at pmkisan.gov.in (search by name, Aadhaar or mobile) (para 9.6)",
+    "If your name is not found, ask the block, tehsil or taluka office to add you (paras 9.4(c), 9.6)",
+    "Make sure your Aadhaar is seeded to your bank account (para 10.3)",
+    "Sign a self-declaration of exclusions; the state certifies eligibility (para 4.2)",
+    "Lists are displayed at village level. Eligible farmers who were excluded can present their case (para 6.4)"
+  ],
+  "deadline": null,
+  "deadline_note": "The guideline sets no application deadline. Beneficiary lists are valid for one year and can be updated (para 11).",
+  "official_portal": "https://pmkisan.gov.in",
+  "source_document": "PM-KISAN Operational Guidelines, revised 29.03.2020 (uploaded RevisedPM-KISANOperationalGuidelines_English_.pdf)",
+  "last_verified": "2026-11-06",
+  "status": "verified_against_uploaded_guideline",
+  "open_items": ["Confirm current portal registration steps; the guideline is from 2020 and the portal may have changed"]
+}
