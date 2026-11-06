@@ -1,0 +1,43 @@
+{
+  "scheme_id": "pms-sc",
+  "scheme_name": "Post-Matric Scholarship for SC Students",
+  "state": "central",
+  "target_group": "Students of Scheduled Caste category, studying beyond Class 10",
+  "eligibility_rules": [
+    {
+      "id": "category",
+      "description": "Student belongs to Scheduled Caste (SC) category",
+      "field": "category",
+      "operator": "equals",
+      "value": "SC",
+      "status": "verified",
+      "source_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1960387"
+    },
+    {
+      "id": "family_income",
+      "description": "Parents' or guardian's annual income from all sources does not exceed ₹2.5 lakh",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 250000,
+      "status": "verified_check_2026_27",
+      "source_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1960387"
+    },
+    {
+      "id": "institution",
+      "description": "Studying in a recognised institution in India",
+      "field": "institution_recognised",
+      "operator": "equals",
+      "value": true,
+      "status": "needs_verification",
+      "source_url": null
+    }
+  ],
+  "benefits": [],
+  "required_documents": [],
+  "application_steps": [],
+  "deadline": null,
+  "official_portal": "https://scholarships.gov.in",
+  "source_url": "https://pib.gov.in/PressReleasePage.aspx?PRID=1960387",
+  "last_verified": "2026-11-06",
+  "verification_notes": "Income ceiling confirmed from PIB release (Sep 2023) and Parliament standing committee report. Confirm 2026-27 guidelines on scholarships.gov.in before publishing. Benefits, documents, steps and deadline are not yet verified and are left empty."
+}
