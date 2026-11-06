@@ -1,0 +1,44 @@
+{
+  "scheme_id": "pmfby",
+  "scheme_name": "Pradhan Mantri Fasal Bima Yojana (PMFBY)",
+  "state": "central",
+  "issuing_authority": "Department of Agriculture, Cooperation and Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India",
+  "target_group": "Farmers, including sharecroppers and tenant farmers, growing notified crops in notified areas",
+  "eligibility_rules": [
+    {"id": "insurable_interest", "description": "Has insurable interest in the insured crop: land records (RoR, LPC) or a state-permitted tenancy or sharecropping agreement", "field": "has_insurable_interest", "operator": "equals", "value": true, "source_para": "3.1, 17.6.3"},
+    {"id": "notified_crop_and_area", "description": "The crop and the area are notified by the state for the season", "field": "crop_and_area_notified", "operator": "equals", "value": true, "source_para": "3.1, 7", "status": "needs_state_and_crop_input"},
+    {"id": "aadhaar_or_enrolment", "description": "Aadhaar number or Aadhaar enrolment number", "field": "has_aadhaar_or_enrolment_number", "operator": "equals", "value": true, "source_para": "6.3, 17.6.3"},
+    {"id": "bank_account", "description": "Holds a bank account (required for non-loanee enrolment through intermediaries)", "field": "has_bank_account", "operator": "equals", "value": true, "source_para": "17.5.6"},
+    {"id": "enrolled_before_cutoff", "description": "Enrolled and premium paid by the state cut-off date for the season", "field": "enrolled_before_cutoff", "operator": "equals", "value": true, "source_para": "16.1, 16.2"}
+  ],
+  "coverage_note": "Loanee farmers with a Seasonal Agricultural Operations loan are covered compulsorily through the bank. Non-loanee farmers are covered voluntarily (paras 3.1.1.1, 3.1.2). There is no income or age limit (not stated).",
+  "benefits": [
+    {"component": "Crop insurance cover for yield losses from notified natural risks (drought, flood, pests, diseases, hailstorm, cyclone and others)", "source_para": "5, 12"},
+    {"component": "Farmer premium: 2% of sum insured (Kharif food grains and oilseeds), 1.5% (Rabi food grains and oilseeds), 5% (annual commercial and horticultural crops), or the actuarial rate if lower", "source_para": "13.1"},
+    {"component": "Remaining premium is a subsidy shared equally by the Centre and the state", "source_para": "13.2.1"}
+  ],
+  "required_documents": [
+    "Aadhaar or Aadhaar enrolment number",
+    "Land records (RoR, Land Possession Certificate) or state-permitted tenancy or sharecropping agreement",
+    "Bank account details",
+    "Sowing certificate: only when changing the insured crop (para 17.7.1)"
+  ],
+  "application_steps": [
+    "Loanee farmers: the bank enrols you automatically when the crop loan is sanctioned (para 3.1.1.1)",
+    "Non-loanee farmers: enrol through an insurance company, a bank, a Common Service Centre, or online on the portal with payment (paras 17.5, 17.6.2)",
+    "Keep the acknowledgement receipt and unique ID that the portal issues (para 17.6.2)",
+    "If your crop is damaged, report the loss within 72 hours to the insurer, bank, agriculture department or the toll-free number (paras 21.4.3.1, 21.4.3.2)"
+  ],
+  "deadline": null,
+  "deadline_note": "Set by each state for every season. Indicative enrolment cut-off is 15 July for Kharif and 15 December for Rabi; the district crop calendar is the final basis (para 16.2). Confirm the current state notification.",
+  "claim_reporting_hours": 72,
+  "official_portal": "https://www.pmfby.gov.in",
+  "source_document": "Revised Operational Guidelines of PMFBY (uploaded Revised_Operational_Guidelines.pdf, 99 pages)",
+  "last_verified": "2026-11-06",
+  "status": "checked_against_uploaded_guideline",
+  "open_items": [
+    "Confirm this is the latest version on pmfby.gov.in (the document refers to 2017 notifications)",
+    "Confirm the 2026 season cut-off dates and notified crops for the user's state",
+    "Confirm how claim payouts reach the farmer (para 13.2 describes the PFMS route)"
+  ]
+}
