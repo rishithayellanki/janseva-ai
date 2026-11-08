@@ -9,6 +9,7 @@ const { execFile } = require('child_process');
 const multer = require('multer');
 const db = require('./db');
 const onboarding = require('./onboarding');
+const eligibility = require('./eligibility');
 
 const app = express();
 app.use(cors());
@@ -98,6 +99,15 @@ app.post('/api/sessions/:id/answer', (req, res) => {
     return res.json({ status: 'complete', message: onboarding.DONE[lang], profile, next_question: null });
   }
   res.json({ status: 'saved', message: next.prompt[lang], profile, next_question: next.field });
+});
+
+// Scheme matches for a session. Scheme records come from the database.
+app.get('/api/sessions/:id/matches', (req, res) => {
+  const row = db.prepare('SELECT * FROM sessions WHERE session_id = ?').get(req.params.id);
+  if (!row) return res.status(404).json({ error: 'session_not_found' });
+  const profile = JSON.parse(row.profile_json);
+  const records = db.prepare('SELECT data_json FROM schemes').all().map((r) => JSON.parse(r.data_json));
+  res.json({ profile, matches: eligibility.matchSchemes(records, profile) });
 });
 
 // Speech to text through Gnani Prisma v3.0. The API key never leaves the backend.

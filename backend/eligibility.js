@@ -24,7 +24,7 @@ function deriveProfile(p) {
   d.owns_cultivable_land_in_records = p.owns_land;
   d.owned_land_on_2019_02_01 = p.land_before_2019;
   if (p.owns_land === true) d.has_insurable_interest = true;
-  if (p.owns_land === false && p.occupation !== 'Farmer') d.has_insurable_interest = false;
+  if (p.owns_land === false && p.occupation !== undefined && p.occupation !== 'Farmer') d.has_insurable_interest = false;
 
   // One family question covers three exclusions: a yes fails each of them
   d.govt_or_psu_employee_or_retired = p.family_excluded_group;
@@ -49,7 +49,7 @@ function deriveProfile(p) {
     if (p.school_govt === true) d.school_type = 'government';
     if (p.school_govt === false) d.school_type = 'other';
     d.has_other_scholarship = p.has_other_scholarship;
-  } else {
+  } else if (p.occupation !== undefined) {
     // Not a student: study-based schemes cannot apply
     d.course_recognised = false;
     d.course_mode = 'not_studying';
