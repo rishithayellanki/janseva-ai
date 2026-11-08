@@ -15,6 +15,7 @@ A voice-first assistant that helps Indian citizens find government schemes, chec
 1. Copy .env.example to .env and add your GNANI_API_KEY.
 2. Never commit .env or audio files.
 3. See docs/scope.md, docs/api-contract.md and docs/gnani-integration.md.
+4. Voice input needs ffmpeg. On macOS run `brew install ffmpeg`.
 
 ## Status
 Scheme records with status "checked_against_uploaded_guideline" have been checked against the official guideline PDF. Each record lists its open items. Do not present a scheme as fully verified until its open items are closed.
