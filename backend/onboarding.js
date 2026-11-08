@@ -18,15 +18,28 @@ const OCCUPATIONS = [
   { label: 'Other', keys: ['other', 'ఇతర'] },
 ];
 
-// Six fixed income bands. Each upper limit matches a scheme threshold or a common cut-off.
 const INCOME_OPTIONS = [
-  { value: 'up_to_1_lakh',     en: 'Up to ₹1 lakh',         te: '₹1 లక్ష వరకు' },
-  { value: '1_to_2_lakh',      en: '₹1 lakh to ₹2 lakh',    te: '₹1 లక్ష నుండి ₹2 లక్షలు' },
-  { value: '2_to_2_5_lakh',    en: '₹2 lakh to ₹2.5 lakh',  te: '₹2 లక్షల నుండి ₹2.5 లక్షలు' },
-  { value: '2_5_to_3_5_lakh',  en: '₹2.5 lakh to ₹3.5 lakh', te: '₹2.5 లక్షల నుండి ₹3.5 లక్షలు' },
-  { value: '3_5_to_4_5_lakh',  en: '₹3.5 lakh to ₹4.5 lakh', te: '₹3.5 లక్షల నుండి ₹4.5 లక్షలు' },
-  { value: 'above_4_5_lakh',   en: 'Above ₹4.5 lakh',       te: '₹4.5 లక్షలకు పైగా' },
+  { value: 'up_to_1_lakh' },
+  { value: '1_to_2_lakh' },
+  { value: '2_to_2_5_lakh' },
+  { value: '2_5_to_3_5_lakh' },
+  { value: '3_5_to_4_5_lakh' },
+  { value: 'above_4_5_lakh' },
 ];
+
+// Number words the speech service may return, in English and Telugu.
+// Tens and units can be combined ("twenty one", "ఇరవై ఒకటి").
+const NUMBER_WORDS = {
+  zero: 0, one: 1, two: 2, three: 3, four: 4, five: 5, six: 6, seven: 7, eight: 8, nine: 9,
+  ten: 10, eleven: 11, twelve: 12, thirteen: 13, fourteen: 14, fifteen: 15, sixteen: 16,
+  seventeen: 17, eighteen: 18, nineteen: 19, twenty: 20, thirty: 30, forty: 40, fifty: 50,
+  sixty: 60, seventy: 70, eighty: 80, ninety: 90,
+  'సున్నా': 0, 'ఒకటి': 1, 'ఒక్కటి': 1, 'రెండు': 2, 'మూడు': 3, 'నాలుగు': 4, 'ఐదు': 5,
+  'ఆరు': 6, 'ఏడు': 7, 'ఎనిమిది': 8, 'తొమ్మిది': 9, 'పది': 10, 'పదకొండు': 11,
+  'పన్నెండు': 12, 'పదమూడు': 13, 'పద్నాలుగు': 14, 'పదిహేను': 15, 'పదహారు': 16,
+  'పదిహేడు': 17, 'పద్దెనిమిది': 18, 'పందొమ్మిది': 19, 'ఇరవై': 20, 'ముప్పై': 30,
+  'నలభై': 40, 'యాభై': 50, 'అరవై': 60, 'డెబ్బై': 70, 'ఎనభై': 80, 'తొంభై': 90,
+};
 
 const QUESTIONS = [
   {
@@ -77,9 +90,31 @@ const DONE = {
   te: 'ధన్యవాదాలు. మీ ప్రొఫైల్ పూర్తయింది. తదుపరి మీకు సరిపడే పథకాలను వెతుకుతాము.',
 };
 
+// Turn number words into digits, and drop trailing punctuation.
+function wordsToDigits(text) {
+  const tokens = text.toLowerCase().replace(/[-.,!?।]/g, ' ').split(/\s+/).filter(Boolean);
+  const out = [];
+  for (let i = 0; i < tokens.length; i++) {
+    const v = NUMBER_WORDS[tokens[i]];
+    if (v === undefined) {
+      out.push(tokens[i]);
+      continue;
+    }
+    let total = v;
+    const next = NUMBER_WORDS[tokens[i + 1]];
+    if (v >= 20 && v % 10 === 0 && next !== undefined && next < 10) {
+      total = v + next;
+      i++;
+    }
+    out.push(String(total));
+  }
+  return out.join(' ');
+}
+
 function normalise(raw) {
-  // Convert Telugu digits (౦-౯) to ASCII digits
-    return String(raw).replace(/[౦-౯]/g, (c) => String(c.charCodeAt(0) - 0x0c66)).trim().replace(/[.,!?।\s]+$/u, '');
+  // Convert Telugu digits (౦-౯) to ASCII digits, then number words to digits
+  const ascii = String(raw).replace(/[౦-౯]/g, (c) => String(c.charCodeAt(0) - 0x0c66));
+  return wordsToDigits(ascii.trim()).trim();
 }
 
 function nextQuestion(profile) {
@@ -118,4 +153,4 @@ function parse(field, raw, lang) {
   return fail;
 }
 
-module.exports = { QUESTIONS, STATES, DONE, nextQuestion, parse };
+module.exports = { QUESTIONS, STATES, DONE, nextQuestion, parse, normalise };
