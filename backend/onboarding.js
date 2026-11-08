@@ -79,7 +79,7 @@ const DONE = {
 
 function normalise(raw) {
   // Convert Telugu digits (౦-౯) to ASCII digits
-  return String(raw).replace(/[౦-౯]/g, (c) => String(c.charCodeAt(0) - 0x0c66)).trim();
+    return String(raw).replace(/[౦-౯]/g, (c) => String(c.charCodeAt(0) - 0x0c66)).trim().replace(/[.,!?।\s]+$/u, '');
 }
 
 function nextQuestion(profile) {
