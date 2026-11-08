@@ -103,3 +103,8 @@ Response 404: { "error": "scheme_not_found" }
 - POST /api/sessions/:id/answer  body {"answer":"..."} returns {status: "saved" | "followup" | "complete", message, profile, next_question}
 - GET /api/sessions/:id returns {session_id, language, profile}
 - Income values: up_to_2_5_lakh, 2_5_to_3_5_lakh, 3_5_to_4_5_lakh, above_4_5_lakh
+
+## Day 2 update: speech and session restore
+- POST /api/transcribe  multipart fields: audio (file, max 5 MB), language ("en" or "te")  returns {transcript, detected_language, source}
+  Errors: 400 no_audio, 413 audio_too_large, 422 no_speech, 502 speech_unavailable
+- GET /api/sessions/:id now also returns next_question and message, so the browser can resume after refresh
