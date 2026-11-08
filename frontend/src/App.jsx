@@ -1,3 +1,4 @@
+import Results from './Results';
 import { useEffect, useRef, useState } from 'react';
 
 const API = 'http://localhost:4000';
@@ -248,6 +249,7 @@ export default function App() {
 
           <h3>{t.profile}</h3>
           <pre style={{ background: '#fafafa', padding: 8 }}>{JSON.stringify(profile, null, 2)}</pre>
+          {complete && <Results sessionId={sessionId} />}
           <button onClick={startOver}>{t.restart}</button>
         </>
       )}
