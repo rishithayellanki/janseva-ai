@@ -108,3 +108,19 @@ Response 404: { "error": "scheme_not_found" }
 - POST /api/transcribe  multipart fields: audio (file, max 5 MB), language ("en" or "te")  returns {transcript, detected_language, source}
   Errors: 400 no_audio, 413 audio_too_large, 422 no_speech, 502 speech_unavailable
 - GET /api/sessions/:id now also returns next_question and message, so the browser can resume after refresh
+
+## Income answer format
+The profile stores `income_range` (not `annual_income_range`) with one of four fixed values, matched to the scheme thresholds:
+- up_to_2_5_lakh
+- 2_5_to_3_5_lakh
+- 3_5_to_4_5_lakh
+- above_4_5_lakh
+
+## Income answer format (updated, replaces the four-value list above)
+The profile stores `income_range` with one of six fixed values:
+- up_to_1_lakh
+- 1_to_2_lakh
+- 2_to_2_5_lakh
+- 2_5_to_3_5_lakh
+- 3_5_to_4_5_lakh
+- above_4_5_lakh

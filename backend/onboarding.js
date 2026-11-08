@@ -18,12 +18,15 @@ const OCCUPATIONS = [
   { label: 'Other', keys: ['other', 'ఇతర'] },
 ];
 
-const INCOME_VALUES = {
-  '1': 'up_to_2_5_lakh',
-  '2': '2_5_to_3_5_lakh',
-  '3': '3_5_to_4_5_lakh',
-  '4': 'above_4_5_lakh',
-};
+// Six fixed income bands. Each upper limit matches a scheme threshold or a common cut-off.
+const INCOME_OPTIONS = [
+  { value: 'up_to_1_lakh',     en: 'Up to ₹1 lakh',         te: '₹1 లక్ష వరకు' },
+  { value: '1_to_2_lakh',      en: '₹1 lakh to ₹2 lakh',    te: '₹1 లక్ష నుండి ₹2 లక్షలు' },
+  { value: '2_to_2_5_lakh',    en: '₹2 lakh to ₹2.5 lakh',  te: '₹2 లక్షల నుండి ₹2.5 లక్షలు' },
+  { value: '2_5_to_3_5_lakh',  en: '₹2.5 lakh to ₹3.5 lakh', te: '₹2.5 లక్షల నుండి ₹3.5 లక్షలు' },
+  { value: '3_5_to_4_5_lakh',  en: '₹3.5 lakh to ₹4.5 lakh', te: '₹3.5 లక్షల నుండి ₹4.5 లక్షలు' },
+  { value: 'above_4_5_lakh',   en: 'Above ₹4.5 lakh',       te: '₹4.5 లక్షలకు పైగా' },
+];
 
 const QUESTIONS = [
   {
@@ -59,12 +62,12 @@ const QUESTIONS = [
   {
     field: 'income_range',
     prompt: {
-      en: 'What is your family’s total annual income? Reply 1 to 4: 1) Up to ₹2.5 lakh 2) ₹2.5 to ₹3.5 lakh 3) ₹3.5 to ₹4.5 lakh 4) Above ₹4.5 lakh',
-      te: 'మీ కుటుంబ మొత్తం వార్షిక ఆదాయం ఎంత? 1 నుండి 4 వరకు సమాధానం ఇవ్వండి: 1) ₹2.5 లక్షల వరకు 2) ₹2.5 నుండి ₹3.5 లక్షలు 3) ₹3.5 నుండి ₹4.5 లక్షలు 4) ₹4.5 లక్షలకు పైగా',
+      en: 'What is your family’s total annual income? Reply 1 to 6: 1) Up to ₹1 lakh 2) ₹1 to ₹2 lakh 3) ₹2 to ₹2.5 lakh 4) ₹2.5 to ₹3.5 lakh 5) ₹3.5 to ₹4.5 lakh 6) Above ₹4.5 lakh',
+      te: 'మీ కుటుంబ మొత్తం వార్షిక ఆదాయం ఎంత? 1 నుండి 6 వరకు సమాధానం ఇవ్వండి: 1) ₹1 లక్ష వరకు 2) ₹1 నుండి ₹2 లక్షలు 3) ₹2 నుండి ₹2.5 లక్షలు 4) ₹2.5 నుండి ₹3.5 లక్షలు 5) ₹3.5 నుండి ₹4.5 లక్షలు 6) ₹4.5 లక్షలకు పైగా',
     },
     followUp: {
-      en: 'Please reply with a number from 1 to 4.',
-      te: 'దయచేసి 1 నుండి 4 మధ్య ఒక సంఖ్యతో సమాధానం ఇవ్వండి.',
+      en: 'Please reply with a number from 1 to 6.',
+      te: 'దయచేసి 1 నుండి 6 మధ్య ఒక సంఖ్యతో సమాధానం ఇవ్వండి.',
     },
   },
 ];
@@ -108,7 +111,8 @@ function parse(field, raw, lang) {
   }
 
   if (field === 'income_range') {
-    return INCOME_VALUES[text] ? { ok: true, value: INCOME_VALUES[text] } : fail;
+    if (/^[1-6]$/.test(text)) return { ok: true, value: INCOME_OPTIONS[Number(text) - 1].value };
+    return fail;
   }
 
   return fail;
