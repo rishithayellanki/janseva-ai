@@ -98,3 +98,8 @@ Response 404: { "error": "scheme_not_found" }
 - Scheme data comes only from data/schemes/*.json. The AI never invents eligibility.
 - A null "deadline" means the official deadline isn't verified, so the UI must not show one.
 - Only the backend calls Gnani. The frontend never sees the API key.
+## Day 2 update: session-based onboarding (replaces /api/profile)
+- POST /api/sessions  body {"language":"en" or "te"} returns {session_id, language, message, next_question}
+- POST /api/sessions/:id/answer  body {"answer":"..."} returns {status: "saved" | "followup" | "complete", message, profile, next_question}
+- GET /api/sessions/:id returns {session_id, language, profile}
+- Income values: up_to_2_5_lakh, 2_5_to_3_5_lakh, 3_5_to_4_5_lakh, above_4_5_lakh

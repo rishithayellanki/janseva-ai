@@ -6,10 +6,14 @@ const db = new DatabaseSync(path.join(__dirname, 'janseva.db'));
 db.exec(`
   CREATE TABLE IF NOT EXISTS sessions (
     session_id   TEXT PRIMARY KEY,
-    language     TEXT NOT NULL DEFAULT 'te',
+    language     TEXT NOT NULL DEFAULT 'en',
     profile_json TEXT NOT NULL DEFAULT '{}',
     created_at   TEXT NOT NULL,
     updated_at   TEXT NOT NULL
+  );
+  CREATE TABLE IF NOT EXISTS schemes (
+    scheme_id TEXT PRIMARY KEY,
+    data_json TEXT NOT NULL
   );
 `);
 
