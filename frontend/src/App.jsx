@@ -7,36 +7,46 @@ const STORE_KEY = 'janseva_session';
 
 const UI = {
   en: {
+    tagline: 'Your Voice. Your Rights. Your Government Benefits.',
+    sovereignBadge: 'Sovereign Indic AI • Digital Public Good',
+    models: ['Gnani Prisma v3.0 (STT)', 'Gnani Timbre v3.0 (TTS)', 'Gnani Evon v3.3 (Reasoning)'],
     send: 'Send',
     mic: '🎤 Speak',
     stop: '⏹ Stop',
-    placeholder: 'Type your answer...',
-    profile: 'Your profile so far',
-    restart: 'Start over',
-    recording: 'Recording... tap Stop when you finish.',
-    transcribing: 'Converting your voice to text...',
-    micDenied: 'Microphone permission was denied. Allow microphone access in your browser settings, or type your answer.',
+    placeholder: 'Type or speak your answer (Telugu or English)...',
+    profile: 'Verified Citizen Snapshot',
+    restart: 'Start Over / మళ్లీ ప్రారంభించండి',
+    recording: 'Listening to your voice...',
+    transcribing: 'Converting Indic speech via Gnani Prisma v3.0...',
+    quickPersonas: 'Quick Demo Personas (DPDP Synthetic Data)',
+    quickPersonasDesc: '1-Click validation of verified welfare journeys',
+    micDenied: 'Microphone permission was denied. Please allow microphone access or type your answer.',
     micNone: 'No microphone was found. Please type your answer.',
     micUnsupported: 'Voice input is not supported in this browser. Please type your answer.',
-    speechFail: 'I could not understand that recording. Please try again or type your answer.',
+    speechFail: 'Could not understand that recording. Please try again or type your answer.',
     speechDown: 'Voice recognition is unavailable right now. Please type your answer.',
-    noServer: 'The server is not reachable. Please try again.',
+    noServer: 'The backend server is not reachable on http://localhost:4000.',
   },
   te: {
+    tagline: 'మీ గొంతు. మీ హక్కులు. మీ ప్రభుత్వ పథకాలు.',
+    sovereignBadge: 'భారతీయ సార్వభౌమ AI • ప్రజా సంక్షేమం',
+    models: ['జ్ఞాని ప్రిజ్మా v3.0 (STT)', 'జ్ఞాని టింబ్రే v3.0 (TTS)', 'జ్ఞాని ఎవోన్ v3.3 (రీజనింగ్)'],
     send: 'పంపు',
     mic: '🎤 మాట్లాడండి',
     stop: '⏹ ఆపు',
-    placeholder: 'మీ సమాధానం టైప్ చేయండి...',
-    profile: 'ఇప్పటివరకు మీ ప్రొఫైల్',
+    placeholder: 'తెలుగు లేదా ఇంగ్లీష్‌లో టైప్ చేయండి లేదా మాట్లాడండి...',
+    profile: 'నిర్ధారించబడిన పౌరుల వివరాలు',
     restart: 'మొదటి నుండి ప్రారంభించండి',
-    recording: 'రికార్డ్ అవుతోంది... పూర్తయ్యాక ఆపు నొక్కండి.',
-    transcribing: 'మీ మాటను టెక్స్ట్‌గా మారుస్తున్నాము...',
-    micDenied: 'మైక్రోఫోన్ అనుమతి ఇవ్వలేదు. బ్రౌజర్ సెట్టింగ్‌లో మైక్రోఫోన్ అనుమతించండి, లేదా టైప్ చేయండి.',
+    recording: 'మీ వాయిస్ వింటున్నాము...',
+    transcribing: 'జ్ఞాని ప్రిజ్మా v3.0 ద్వారా మాటను టెక్స్ట్‌గా మారుస్తున్నాము...',
+    quickPersonas: 'డెమో ప్రొఫైల్స్ (సింథటిక్ డేటా)',
+    quickPersonasDesc: 'ఒక్క క్లిక్‌తో పథకాల అర్హత తనిఖీ చేయండి',
+    micDenied: 'మైక్రోఫోన్ అనుమతి ఇవ్వలేదు. బ్రౌజర్ సెట్టింగ్‌లో అనుమతించండి, లేదా టైప్ చేయండి.',
     micNone: 'మైక్రోఫోన్ కనబడలేదు. దయచేసి టైప్ చేయండి.',
     micUnsupported: 'ఈ బ్రౌజర్‌లో వాయిస్ ఇన్‌పుట్ పని చేయదు. దయచేసి టైప్ చేయండి.',
     speechFail: 'ఆ రికార్డింగ్ అర్థం కాలేదు. మళ్లీ ప్రయత్నించండి లేదా టైప్ చేయండి.',
     speechDown: 'వాయిస్ సేవ ప్రస్తుతం అందుబాటులో లేదు. దయచేసి టైప్ చేయండి.',
-    noServer: 'సర్వర్ అందుబాటులో లేదు. దయచేసి మళ్లీ ప్రయత్నించండి.',
+    noServer: 'సర్వర్ అందుబాటులో లేదు. దయచేసి బ్యాకెండ్ నడుస్తోందో లేదో చూడండి.',
   },
 };
 
@@ -50,12 +60,21 @@ export default function App() {
   const [recording, setRecording] = useState(false);
   const [transcribing, setTranscribing] = useState(false);
   const [complete, setComplete] = useState(false);
+  const [presets, setPresets] = useState([]);
   const endRef = useRef(null);
   const recorderRef = useRef(null);
   const chunksRef = useRef([]);
   const streamRef = useRef(null);
 
   const t = UI[language || 'en'];
+
+  // Load demo presets from backend
+  useEffect(() => {
+    fetch(`${API}/api/demo-presets`)
+      .then((r) => (r.ok ? r.json() : []))
+      .then((data) => setPresets(data))
+      .catch(() => {});
+  }, []);
 
   // Restore the session after a page refresh
   useEffect(() => {
@@ -77,7 +96,7 @@ export default function App() {
       .catch(() => {});
   }, []);
 
-  // Save the session after every change
+  // Save session state
   useEffect(() => {
     if (sessionId) localStorage.setItem(STORE_KEY, JSON.stringify({ sessionId, messages }));
   }, [sessionId, messages]);
@@ -106,6 +125,29 @@ export default function App() {
       setMessages([{ from: 'bot', text: data.message }]);
     } catch {
       addBot(UI[lang].noServer);
+    }
+    setBusy(false);
+  }
+
+  async function loadPreset(presetId) {
+    setBusy(true);
+    const lang = language || 'en';
+    try {
+      const res = await fetch(`${API}/api/sessions/preset/${presetId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ language: lang }),
+      });
+      const data = await res.json();
+      setLanguage(lang);
+      setSessionId(data.session_id);
+      setProfile(data.profile);
+      setComplete(true);
+      setMessages([
+        { from: 'bot', text: lang === 'te' ? 'సింథటిక్ డెమో ప్రొఫైల్ లోడ్ అయింది. ఫలితాలు క్రింద చూడండి:' : 'Synthetic demo profile loaded. See your verified results below:' },
+      ]);
+    } catch {
+      addBot(t.noServer);
     }
     setBusy(false);
   }
@@ -153,8 +195,9 @@ export default function App() {
       const res = await fetch(`${API}/api/transcribe`, { method: 'POST', body: form });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) addBot(data.error === 'speech_unavailable' ? t.speechDown : t.speechFail);
-      else if (data.transcript) setInput(data.transcript);
-      else addBot(t.speechFail);
+      else if (data.transcript) {
+        setInput(data.transcript);
+      } else addBot(t.speechFail);
     } catch {
       addBot(t.noServer);
     }
@@ -186,7 +229,7 @@ export default function App() {
       transcribe(new Blob(chunksRef.current, { type: rec.mimeType || 'audio/webm' }));
     };
     recorderRef.current = rec;
-        rec.start();
+    rec.start();
     setRecording(true);
     setTimeout(() => {
       if (recorderRef.current?.state === 'recording') stopRecording();
@@ -199,60 +242,150 @@ export default function App() {
   }
 
   return (
-    <main style={{ fontFamily: 'sans-serif', maxWidth: 640, margin: '0 auto', padding: '1rem' }}>
-      <h1>JanSeva AI</h1>
-      <p>Your Voice. Your Rights. Your Government Benefits.</p>
+    <main>
+      <header className="app-header">
+        <div className="brand-badge">
+          <span>🇮🇳</span> {t.sovereignBadge}
+        </div>
+        <h1 className="brand-title">JanSeva AI</h1>
+        <p className="brand-tagline">{t.tagline}</p>
+        <div className="model-stack-pills">
+          {t.models.map((m, idx) => (
+            <span key={idx} className="model-pill">
+              ⚡ {m}
+            </span>
+          ))}
+        </div>
+      </header>
+
+      {/* Quick Demo Presets Bar */}
+      <section className="demo-preset-container">
+        <div className="preset-header">
+          <span className="preset-title">{t.quickPersonas}</span>
+          <span className="preset-badge-info">DPDP Synthetic • Zero PII</span>
+        </div>
+        <div className="preset-buttons-grid">
+          {presets.map((p) => (
+            <button
+              key={p.id}
+              type="button"
+              className="preset-btn"
+              onClick={() => loadPreset(p.id)}
+              disabled={busy}
+            >
+              <span className="preset-btn-name">
+                {language === 'te' ? p.name_te : p.name}
+              </span>
+              <span className="preset-btn-desc">
+                {language === 'te' ? p.description_te : p.description}
+              </span>
+            </button>
+          ))}
+        </div>
+      </section>
 
       {!language && (
-        <div>
-          <p>Choose a language / భాష ఎంచుకోండి</p>
-          <button onClick={() => startSession('en')} disabled={busy}>English</button>{' '}
-          <button onClick={() => startSession('te')} disabled={busy}>తెలుగు</button>
-        </div>
+        <section className="language-card">
+          <h2>Select Interface Language / భాషను ఎంచుకోండి</h2>
+          <p style={{ marginTop: 8, color: '#64748b', fontSize: 14 }}>
+            Voice and text support in bilingual Telugu and English
+          </p>
+          <div className="lang-btn-group">
+            <button className="btn-lang btn-lang-en" onClick={() => startSession('en')} disabled={busy}>
+              English
+            </button>
+            <button className="btn-lang btn-lang-te" onClick={() => startSession('te')} disabled={busy}>
+              తెలుగు (Telugu)
+            </button>
+          </div>
+        </section>
       )}
 
       {language && (
         <>
-          <div style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, height: 360, overflowY: 'auto' }}>
-            {messages.map((m, i) => (
-              <div key={i} style={{ textAlign: m.from === 'user' ? 'right' : 'left', margin: '8px 0' }}>
-                <span style={{
-                  display: 'inline-block', padding: '8px 12px', borderRadius: 12, maxWidth: '80%',
-                  background: m.from === 'user' ? '#d6f0ff' : '#f0f0f0',
-                }}>
-                  {m.text}
-                </span>
-                {m.from === 'bot' && <SpeakButton text={m.text} language={language} />}
+          <section className="chat-window">
+            <div className="chat-messages">
+              {messages.map((m, i) => (
+                <div key={i} className={`message-row ${m.from}`}>
+                  <div className="message-bubble">{m.text}</div>
+                  {m.from === 'bot' && (
+                    <div className="bot-actions">
+                      <SpeakButton text={m.text} language={language} />
+                    </div>
+                  )}
+                </div>
+              ))}
+              <div ref={endRef} />
+            </div>
+
+            {recording && (
+              <div className="voice-status-indicator">
+                <div className="soundwave">
+                  <span />
+                  <span />
+                  <span />
+                  <span />
+                </div>
+                <span>{t.recording}</span>
               </div>
-            ))}
-            <div ref={endRef} />
-          </div>
+            )}
+            {transcribing && (
+              <div className="voice-status-indicator" style={{ background: '#eff6ff', color: '#1d4ed8' }}>
+                <span>⏳ {t.transcribing}</span>
+              </div>
+            )}
 
-          {recording && <p>{t.recording}</p>}
-          {transcribing && <p>{t.transcribing}</p>}
+            <form onSubmit={sendAnswer} className="chat-controls-bar">
+              <button
+                type="button"
+                className={`btn-mic ${recording ? 'recording' : ''}`}
+                onClick={recording ? stopRecording : startRecording}
+                disabled={busy || transcribing || complete}
+              >
+                {recording ? t.stop : t.mic}
+              </button>
+              <input
+                className="input-text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder={t.placeholder}
+                disabled={busy || complete}
+              />
+              <button type="submit" className="btn-primary" disabled={busy || complete || !input.trim()}>
+                {t.send}
+              </button>
+            </form>
+          </section>
 
-          <form onSubmit={sendAnswer} style={{ display: 'flex', gap: 8, marginTop: 8 }}>
-            <button
-              type="button"
-              onClick={recording ? stopRecording : startRecording}
-              disabled={busy || transcribing || complete}
-            >
-              {recording ? t.stop : t.mic}
-            </button>
-            <input
-              value={input}
-              onChange={(e) => setInput(e.target.value)}
-              placeholder={t.placeholder}
-              disabled={busy || complete}
-              style={{ flex: 1, padding: 8 }}
-            />
-            <button type="submit" disabled={busy || complete || !input.trim()}>{t.send}</button>
-          </form>
+          {/* Profile Summary Badge Bar */}
+          {Object.keys(profile).length > 0 && (
+            <section className="profile-card">
+              <div className="profile-card-title">
+                <span>{t.profile}</span>
+                <span style={{ fontSize: 11, color: '#16a34a', fontWeight: 600 }}>● Active Session</span>
+              </div>
+              <div className="profile-chips">
+                {profile.age && <span className="profile-chip">🎂 Age: {profile.age}</span>}
+                {profile.occupation && <span className="profile-chip">💼 {profile.occupation}</span>}
+                {profile.state && <span className="profile-chip">📍 {profile.state}</span>}
+                {profile.income_range && (
+                  <span className="profile-chip">💰 Income: {profile.income_range.replace(/_/g, ' ')}</span>
+                )}
+                {profile.category && <span className="profile-chip">🏷️ Category: {profile.category}</span>}
+                {profile.owns_land !== undefined && (
+                  <span className="profile-chip">🌾 Land: {profile.owns_land ? 'Yes' : 'No'}</span>
+                )}
+              </div>
+            </section>
+          )}
 
-          <h3>{t.profile}</h3>
-          <pre style={{ background: '#fafafa', padding: 8 }}>{JSON.stringify(profile, null, 2)}</pre>
           {complete && <Results sessionId={sessionId} language={language} />}
-          <button onClick={startOver}>{t.restart}</button>
+
+          <div style={{ textAlign: 'center', marginTop: 24 }}>
+            <button type="button" className="btn-secondary" onClick={startOver}>
+              🔄 {t.restart}
+            </button>
+          </div>
         </>
       )}
     </main>
