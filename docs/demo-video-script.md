@@ -26,6 +26,6 @@
 ---
 
 ## 🎬 Tips for Recording the Video
-1. **Use the One-Click Demo Presets**: In the video, start with a live voice input to showcase Prisma v3.0, and then tap the preset *Ananya (College Student, SC)* or *Ramesh (Small Farmer)* to instantly display the rich multi-scheme verification!
+1. **Use the Citizen Category Pathways**: In the video, start with a live voice input to showcase Prisma v3.0, and then tap the category *"College & Higher Education Students"* or *"Small & Marginal Landholding Farmers"* to instantly display the rich multi-scheme verification!
 2. **Audio Quality**: Record in a quiet room or use crisp microphone input.
 3. **Screen Size**: Zoom browser to 110% (`Cmd + +`) so the text, badges, and soundwaves are razor sharp on mobile feeds.
