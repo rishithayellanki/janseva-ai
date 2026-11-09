@@ -81,7 +81,7 @@ export default function HomeView({ language, onStartVoice, onSelectPreset, prese
 
       {/* Feature Pillars Grid */}
       <section className="home-section">
-        <h2 className="section-title">🏛️ {isTe ? 'జనసేవ AI ప్రత్యేకతలు' : 'Why JanSeva AI Wins'}</h2>
+        <h2 className="section-title">🏛️ {isTe ? 'జనసేవ AI ప్రధాన మూలస్తంభాలు' : 'Core Sovereign Architecture Pillars'}</h2>
         <div className="pillars-grid">
           <div className="pillar-card">
             <span className="pillar-icon">⚖️</span>
