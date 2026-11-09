@@ -26,6 +26,7 @@ const UI = {
     speechFail: 'Could not understand that recording. Please try again or type your answer.',
     speechDown: 'Voice recognition is unavailable right now. Please type your answer.',
     noServer: 'The backend server is not reachable on http://localhost:4000.',
+    stepProgress: 'Citizen Onboarding Progress',
   },
   te: {
     tagline: 'మీ గొంతు. మీ హక్కులు. మీ ప్రభుత్వ పథకాలు.',
@@ -47,6 +48,7 @@ const UI = {
     speechFail: 'ఆ రికార్డింగ్ అర్థం కాలేదు. మళ్లీ ప్రయత్నించండి లేదా టైప్ చేయండి.',
     speechDown: 'వాయిస్ సేవ ప్రస్తుతం అందుబాటులో లేదు. దయచేసి టైప్ చేయండి.',
     noServer: 'సర్వర్ అందుబాటులో లేదు. దయచేసి బ్యాకెండ్ నడుస్తోందో లేదో చూడండి.',
+    stepProgress: 'ప్రొఫైల్ నమోదు పురోగతి',
   },
 };
 
@@ -76,7 +78,7 @@ export default function App() {
       .catch(() => {});
   }, []);
 
-  // Restore the session after a page refresh
+  // Restore session after refresh
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
     if (!saved) return;
@@ -129,6 +131,14 @@ export default function App() {
     setBusy(false);
   }
 
+  async function switchLanguage(newLang) {
+    if (newLang === language) return;
+    setLanguage(newLang);
+    if (!sessionId) {
+      await startSession(newLang);
+    }
+  }
+
   async function loadPreset(presetId) {
     setBusy(true);
     const lang = language || 'en';
@@ -144,7 +154,13 @@ export default function App() {
       setProfile(data.profile);
       setComplete(true);
       setMessages([
-        { from: 'bot', text: lang === 'te' ? 'సింథటిక్ డెమో ప్రొఫైల్ లోడ్ అయింది. ఫలితాలు క్రింద చూడండి:' : 'Synthetic demo profile loaded. See your verified results below:' },
+        {
+          from: 'bot',
+          text:
+            lang === 'te'
+              ? 'సింథటిక్ డెమో ప్రొఫైల్ లోడ్ అయింది. అధికారిక పథకాల ఫలితాలు క్రింద చూడండి:'
+              : 'Synthetic demo profile loaded. See your verified statutory scheme matches below:',
+        },
       ]);
     } catch {
       addBot(t.noServer);
@@ -241,12 +257,34 @@ export default function App() {
     setRecording(false);
   }
 
+  const answeredCount = Object.keys(profile).length;
+  const progressPercent = Math.min(100, Math.round((answeredCount / 10) * 100));
+
   return (
     <main>
       <header className="app-header">
-        <div className="brand-badge">
-          <span>🇮🇳</span> {t.sovereignBadge}
+        <div className="header-top-bar">
+          <div className="brand-badge">
+            <span>🇮🇳</span> {t.sovereignBadge}
+          </div>
+          <div className="lang-switch-pill">
+            <button
+              type="button"
+              className={`lang-switch-btn ${language === 'en' || !language ? 'active' : ''}`}
+              onClick={() => switchLanguage('en')}
+            >
+              English
+            </button>
+            <button
+              type="button"
+              className={`lang-switch-btn ${language === 'te' ? 'active' : ''}`}
+              onClick={() => switchLanguage('te')}
+            >
+              తెలుగు
+            </button>
+          </div>
         </div>
+
         <h1 className="brand-title">JanSeva AI</h1>
         <p className="brand-tagline">{t.tagline}</p>
         <div className="model-stack-pills">
@@ -303,6 +341,17 @@ export default function App() {
 
       {language && (
         <>
+          {/* Stepper Progress Bar */}
+          {!complete && (
+            <div className="stepper-container">
+              <span>{t.stepProgress} ({answeredCount}/10)</span>
+              <div className="stepper-bar">
+                <div className="stepper-progress" style={{ width: `${progressPercent}%` }} />
+              </div>
+              <span>{progressPercent}%</span>
+            </div>
+          )}
+
           <section className="chat-window">
             <div className="chat-messages">
               {messages.map((m, i) => (
@@ -358,7 +407,7 @@ export default function App() {
           </section>
 
           {/* Profile Summary Badge Bar */}
-          {Object.keys(profile).length > 0 && (
+          {answeredCount > 0 && (
             <section className="profile-card">
               <div className="profile-card-title">
                 <span>{t.profile}</span>
@@ -379,7 +428,7 @@ export default function App() {
             </section>
           )}
 
-          {complete && <Results sessionId={sessionId} language={language} />}
+          {complete && <Results sessionId={sessionId} language={language} profile={profile} />}
 
           <div style={{ textAlign: 'center', marginTop: 24 }}>
             <button type="button" className="btn-secondary" onClick={startOver}>

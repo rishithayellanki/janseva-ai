@@ -6,6 +6,8 @@ const SHORT = {
   nmmss: 'NMMSS merit scholarship',
   'pm-kisan': 'PM KISAN',
   pmfby: 'PMFBY crop insurance',
+  'pm-jay': 'Ayushman Bharat PM JAY',
+  'pm-svanidhi': 'PM SVANidhi street vendor loan',
 };
 
 function names(list) {

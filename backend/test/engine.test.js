@@ -81,4 +81,27 @@ const pmkisan = farmerMatches.find((m) => m.scheme_id === 'pm-kisan');
 assert.ok(pmkisan.met.length >= 5, 'Farmer meets core land and exclusion rules');
 console.log('✓ Scenario B: PM-KISAN rules verified');
 
+// Scenario C: Self-employed Street Vendor (PM SVANidhi & PM-JAY verification)
+const vendorProfile = {
+  age: 36,
+  occupation: 'Self-employed',
+  state: 'Telangana',
+  income_range: '1_to_2_lakh',
+  category: 'BC',
+  is_indian_national: true,
+  has_aadhaar: true,
+  has_bank_account: true,
+  owns_land: false,
+  paid_income_tax: false,
+  family_excluded_group: false,
+  receives_pension: false,
+};
+const vendorMatches = eligibility.matchSchemes(records, vendorProfile);
+const pmsvanidhi = vendorMatches.find((m) => m.scheme_id === 'pm-svanidhi');
+assert.strictEqual(pmsvanidhi.eligibility_status, 'eligible', 'Vendor must be eligible for PM SVANidhi');
+
+const pmjay = vendorMatches.find((m) => m.scheme_id === 'pm-jay');
+assert.strictEqual(pmjay.eligibility_status, 'eligible', 'Low income family must be eligible for Ayushman Bharat PM-JAY');
+console.log('✓ Scenario C: PM SVANidhi & PM-JAY eligibility verified');
+
 console.log('ALL ENGINE TESTS PASSED SUCCESSFULLY! (100% Deterministic Guarantee)');

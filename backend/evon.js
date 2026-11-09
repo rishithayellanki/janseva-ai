@@ -36,6 +36,18 @@ const DOCUMENT_PROCUREMENT_GUIDE = {
     portal: 'https://scholarships.gov.in',
     processing_time: '1-2 days',
   },
+  'Ration Card': {
+    en: 'Apply for or download Food Security Card / White Ration Card from EPDS portal (epds.telangana.gov.in / epdsap.ap.gov.in) or your local MeeSeva.',
+    te: 'ఈపీడీఎస్ పోర్టల్ (epds.telangana.gov.in) లేదా మీసేవ కేంద్రం ద్వారా ఆహార భద్రతా కార్డు / తెల్ల రేషన్ కార్డు పొందండి.',
+    portal: 'https://epds.telangana.gov.in',
+    processing_time: '15-30 days',
+  },
+  'Vending Certificate': {
+    en: 'Obtain Town Vending Committee (TVC) Certificate or Letter of Recommendation (LoR) from your local Municipality / Municipal Corporation office.',
+    te: 'మీ స్థానిక మున్సిపాలిటీ లేదా మున్సిపల్ కార్పొరేషన్ కార్యాలయం నుండి టౌన్ వెండింగ్ కమిటీ సర్టిఫికేట్ లేదా సిఫార్సు లేఖ పొందండి.',
+    portal: 'https://pmsvanidhi.mohua.gov.in',
+    processing_time: '7-14 days',
+  },
 };
 
 function getProcurementAdvice(docName, lang = 'en') {

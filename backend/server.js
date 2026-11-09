@@ -120,6 +120,28 @@ const DEMO_PRESETS = [
       has_other_scholarship: false,
     },
   },
+  {
+    id: 'vendor-se',
+    name: 'Lakshmi (Street Vendor / Self-Employed)',
+    name_te: 'లక్ష్మి (చిరు వ్యాపారి / స్వయం ఉపాధి)',
+    badge: 'PM SVANidhi & PM-JAY Match',
+    description: '36 yrs, Self-employed, Telangana, Income ₹1-2L, Urban Micro-credit',
+    description_te: '36 సం., స్వయం ఉపాధి, తెలంగాణ, వార్షిక ఆదాయం ₹1-2 లక్షలు',
+    profile: {
+      age: 36,
+      occupation: 'Self-employed',
+      state: 'Telangana',
+      income_range: '1_to_2_lakh',
+      category: 'BC',
+      is_indian_national: true,
+      has_aadhaar: true,
+      has_bank_account: true,
+      owns_land: false,
+      paid_income_tax: false,
+      family_excluded_group: false,
+      receives_pension: false,
+    },
+  },
 ];
 
 app.get('/api/health', (req, res) => {

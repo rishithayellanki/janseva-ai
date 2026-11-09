@@ -40,6 +40,14 @@ const L = {
     procureGuide: 'Where to get this?',
     askPlaceholder: 'Ask a question about this scheme in Telugu or English...',
     askBtn: 'Ask Evon AI',
+    filterAll: 'All Schemes',
+    filterEdu: '🎓 Education',
+    filterAgri: '🌾 Agriculture',
+    filterHealth: '🏥 Health',
+    filterLive: '💼 Livelihood & MSME',
+    statusAll: 'All Statuses',
+    printBtn: '🖨️ Print Welfare Slip',
+    readyDocs: 'ready',
   },
   te: {
     title: 'మీ అధికారిక పథకాల ఫలితాలు',
@@ -76,7 +84,25 @@ const L = {
     procureGuide: 'ఎక్కడ పొందాలి?',
     askPlaceholder: 'ఈ పథకం గురించి ఏదైనా సందేహం అడగండి...',
     askBtn: 'అడగండి',
+    filterAll: 'అన్ని పథకాలు',
+    filterEdu: '🎓 విద్య',
+    filterAgri: '🌾 వ్యవసాయం',
+    filterHealth: '🏥 ఆరోగ్యం',
+    filterLive: '💼 ఉపాధి / వ్యాపారం',
+    statusAll: 'అన్ని ఫలితాలు',
+    printBtn: '🖨️ సంక్షేమ పత్రం ప్రింట్ చేయండి',
+    readyDocs: 'సిద్ధంగా ఉన్నాయి',
   },
+};
+
+const SCHEME_CATEGORIES = {
+  'pms-sc': 'edu',
+  'pm-usp-csss': 'edu',
+  'nmmss': 'edu',
+  'pm-kisan': 'agri',
+  'pmfby': 'agri',
+  'pm-jay': 'health',
+  'pm-svanidhi': 'live',
 };
 
 function rupees(n) {
@@ -103,7 +129,7 @@ function benefitText(b) {
   return parts.filter(Boolean).join('. ');
 }
 
-export default function Results({ sessionId, language = 'en' }) {
+export default function Results({ sessionId, language = 'en', profile = {} }) {
   const t = L[language] || L.en;
   const [matches, setMatches] = useState(null);
   const [error, setError] = useState(false);
@@ -113,6 +139,8 @@ export default function Results({ sessionId, language = 'en' }) {
   const [queries, setQueries] = useState({});
   const [docGuides, setDocGuides] = useState({});
   const [checkedDocs, setCheckedDocs] = useState({});
+  const [categoryFilter, setCategoryFilter] = useState('all');
+  const [statusFilter, setStatusFilter] = useState('all');
   const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
@@ -200,234 +228,329 @@ export default function Results({ sessionId, language = 'en' }) {
     );
   }
 
+  const filteredMatches = matches.filter((m) => {
+    const cat = SCHEME_CATEGORIES[m.scheme_id] || 'other';
+    const matchesCat = categoryFilter === 'all' || cat === categoryFilter;
+    const matchesStatus = statusFilter === 'all' || m.eligibility_status === statusFilter;
+    return matchesCat && matchesStatus;
+  });
+
   return (
     <section>
+      {/* Print-Only Header for Citizen Welfare Passbook */}
+      <div className="print-only-header">
+        <h1 style={{ fontSize: 20 }}>JANSEVA AI — CITIZEN WELFARE ENTITLEMENT SLIP</h1>
+        <p style={{ fontSize: 12 }}>Verified against Ministry Gazette Guidelines • Government of India</p>
+        <p style={{ fontSize: 11, marginTop: 4 }}>Date of Verification: {new Date().toLocaleDateString('en-IN')}</p>
+      </div>
+
       <div className="results-header">
         <h2 className="results-title">{t.title}</h2>
         <p className="results-subtitle">{t.subtitle}</p>
-        <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
-          <SpeakButton
-            text={summaryText(matches, language)}
-            language={language}
-          />
-          <span style={{ fontSize: 12, color: '#64748b' }}>
-            🔊 {language === 'te' ? 'మొత్తం ఫలితాలను వినండి (Gnani Timbre)' : 'Listen to full results summary (Gnani Timbre)'}
-          </span>
-        </div>
-      </div>
 
-      {matches.map((m) => (
-        <article key={m.scheme_id} className={`scheme-card ${m.eligibility_status}`}>
-          <div className="scheme-card-top">
-            <div>
-              <h3 className="scheme-title">{m.scheme_name}</h3>
-              <p style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>{m.target_group}</p>
-            </div>
-            <span className={`status-badge ${m.eligibility_status}`}>
-              {t.status[m.eligibility_status]}
+        <div className="results-top-actions">
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+            <SpeakButton
+              text={summaryText(matches, language)}
+              language={language}
+            />
+            <span style={{ fontSize: 12, color: '#64748b' }}>
+              🔊 {language === 'te' ? 'మొత్తం ఫలితాలను వినండి (Gnani Timbre)' : 'Listen to full results summary (Gnani Timbre)'}
             </span>
           </div>
 
-          {/* Primary Benefit Callout */}
-          {m.benefits && m.benefits.length > 0 && (
-            <div className="benefit-highlight">
-              🎁 <strong>{t.benefits}:</strong> {benefitText(m.benefits[0])}
-            </div>
-          )}
+          <button
+            type="button"
+            className="btn-secondary"
+            onClick={() => window.print()}
+          >
+            {t.printBtn}
+          </button>
+        </div>
 
-          {/* Rules Met */}
-          {m.met && m.met.length > 0 && (
-            <div style={{ margin: '10px 0' }}>
-              <div style={{ fontSize: 12.5, fontWeight: 700, color: '#166534', marginBottom: 4 }}>
-                ✓ {t.why}
+        {/* Category & Status Filter Pills */}
+        <div className="filter-pills-row">
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('all')}
+          >
+            {t.filterAll} ({matches.length})
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'edu' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('edu')}
+          >
+            {t.filterEdu}
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'agri' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('agri')}
+          >
+            {t.filterAgri}
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'health' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('health')}
+          >
+            {t.filterHealth}
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${categoryFilter === 'live' ? 'active' : ''}`}
+            onClick={() => setCategoryFilter('live')}
+          >
+            {t.filterLive}
+          </button>
+
+          <span style={{ borderLeft: '1px solid #cbd5e1', margin: '0 4px' }} />
+
+          <button
+            type="button"
+            className={`filter-btn ${statusFilter === 'all' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('all')}
+          >
+            {t.statusAll}
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${statusFilter === 'eligible' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('eligible')}
+          >
+            🟢 {t.status.eligible}
+          </button>
+          <button
+            type="button"
+            className={`filter-btn ${statusFilter === 'needs_more_information' ? 'active' : ''}`}
+            onClick={() => setStatusFilter('needs_more_information')}
+          >
+            🟡 {t.status.needs_more_information}
+          </button>
+        </div>
+      </div>
+
+      {filteredMatches.map((m) => {
+        const checkedCount = (m.required_documents || []).filter((_, idx) => checkedDocs[`${m.scheme_id}_${idx}`]).length;
+        const totalDocs = (m.required_documents || []).length;
+
+        return (
+          <article key={m.scheme_id} className={`scheme-card ${m.eligibility_status}`}>
+            <div className="scheme-card-top">
+              <div>
+                <h3 className="scheme-title">{m.scheme_name}</h3>
+                <p style={{ fontSize: 13, color: '#64748b', marginTop: 2 }}>{m.target_group}</p>
               </div>
-              <ul style={{ paddingLeft: 18, fontSize: 13, color: '#334155' }}>
-                {m.met.map((item) => (
-                  <li key={item.id} style={{ marginBottom: 2 }}>
-                    {item.description}{' '}
-                    {item.source_para && (
-                      <span style={{ color: '#64748b', fontSize: 11 }}>[Para {item.source_para}]</span>
-                    )}
-                  </li>
-                ))}
-              </ul>
+              <span className={`status-badge ${m.eligibility_status}`}>
+                {t.status[m.eligibility_status]}
+              </span>
             </div>
-          )}
 
-          {/* Rules Unmet */}
-          {m.unmet && m.unmet.length > 0 && (
-            <div style={{ margin: '10px 0' }}>
-              <div style={{ fontSize: 12.5, fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>
-                ✗ {t.unmet}
+            {/* Primary Benefit Callout */}
+            {m.benefits && m.benefits.length > 0 && (
+              <div className="benefit-highlight">
+                🎁 <strong>{t.benefits}:</strong> {benefitText(m.benefits[0])}
               </div>
-              <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569' }}>
-                {m.unmet.map((item) => (
-                  <li key={item.id} style={{ marginBottom: 2 }}>
-                    {item.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
+            )}
 
-          {/* Rules Missing / Needs More Info */}
-          {m.missing && m.missing.length > 0 && (
-            <div style={{ margin: '10px 0' }}>
-              <div style={{ fontSize: 12.5, fontWeight: 700, color: '#d97706', marginBottom: 4 }}>
-                ? {t.missing}
-              </div>
-              <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569' }}>
-                {m.missing.map((item) => (
-                  <li key={item.id} style={{ marginBottom: 2 }}>
-                    {item.description}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Interactive Document Checklist */}
-          {m.required_documents && m.required_documents.length > 0 && (
-            <div className="checklist-container">
-              <div className="checklist-title">📋 {t.docs}</div>
-              {m.required_documents.map((doc, idx) => {
-                const docKey = `${m.scheme_id}_${idx}`;
-                const guide = docGuides[doc];
-                return (
-                  <div key={idx} style={{ marginBottom: 6 }}>
-                    <div className="checklist-item">
-                      <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
-                        <input
-                          type="checkbox"
-                          checked={Boolean(checkedDocs[docKey])}
-                          onChange={() => toggleDoc(docKey)}
-                        />
-                        <span style={{ textDecoration: checkedDocs[docKey] ? 'line-through' : 'none' }}>
-                          {doc}
-                        </span>
-                      </label>
-                      <button
-                        type="button"
-                        className="guide-pill"
-                        onClick={() => fetchDocGuide(doc)}
-                      >
-                        {guide ? '▲ Close' : `ℹ️ ${t.procureGuide}`}
-                      </button>
-                    </div>
-                    {guide && (
-                      <div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: 6, padding: '8px 12px', fontSize: 12, marginTop: 4 }}>
-                        <p style={{ color: '#0f172a' }}>{guide.instructions}</p>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, color: '#64748b' }}>
-                          <span>⏱ Processing: {guide.processing_time}</span>
-                          <a href={guide.portal} target="_blank" rel="noreferrer" style={{ color: '#0284c7' }}>
-                            Official Portal ↗
-                          </a>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          )}
-
-          {/* Evon v3.3 Sovereign Advisory Box */}
-          {counseling[m.scheme_id] && (
-            <div className="evon-counsel-box">
-              <div className="evon-box-header">
-                <span className="evon-label">✨ {t.evonTitle}</span>
-                <SpeakButton text={counseling[m.scheme_id]} language={language} />
-              </div>
-              <p className="evon-text">{counseling[m.scheme_id]}</p>
-            </div>
-          )}
-
-          {/* Action Row */}
-          <div className="scheme-actions">
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={() => fetchCounseling(m.scheme_id)}
-              disabled={counselLoading[m.scheme_id]}
-            >
-              {counselLoading[m.scheme_id] ? t.evonLoading : t.evonExplainBtn}
-            </button>
-
-            <button
-              type="button"
-              className="btn-secondary"
-              onClick={() => setOpen((o) => ({ ...o, [m.scheme_id]: !o[m.scheme_id] }))}
-            >
-              {open[m.scheme_id] ? `▲ ${t.hide}` : `▼ ${t.show}`}
-            </button>
-
-            <a
-              href={m.official_portal}
-              target="_blank"
-              rel="noreferrer"
-              className="btn-portal"
-            >
-              🌐 {t.portal} ↗
-            </a>
-          </div>
-
-          {/* Ask Evon Input */}
-          <form onSubmit={(e) => askQuestion(m.scheme_id, e)} style={{ display: 'flex', gap: 8, marginTop: 10 }}>
-            <input
-              style={{ flex: 1, padding: '6px 12px', fontSize: 12.5, borderRadius: 6, border: '1px solid #cbd5e1' }}
-              placeholder={t.askPlaceholder}
-              value={queries[m.scheme_id] || ''}
-              onChange={(e) => setQueries({ ...queries, [m.scheme_id]: e.target.value })}
-            />
-            <button
-              type="submit"
-              className="btn-secondary"
-              disabled={counselLoading[m.scheme_id] || !(queries[m.scheme_id] || '').trim()}
-            >
-              {t.askBtn}
-            </button>
-          </form>
-
-          {/* Detailed Collapsible Accordion */}
-          {open[m.scheme_id] && (
-            <div style={{ background: '#f8fafc', padding: 14, borderRadius: 8, marginTop: 12, border: '1px solid #e2e8f0' }}>
-              <div style={{ marginBottom: 10 }}>
-                <strong style={{ fontSize: 13, color: '#334155' }}>🎁 {t.benefits}:</strong>
-                <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569', marginTop: 4 }}>
-                  {(m.benefits || []).map((b, i) => (
-                    <li key={i}>{benefitText(b)}</li>
+            {/* Rules Met */}
+            {m.met && m.met.length > 0 && (
+              <div style={{ margin: '10px 0' }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: '#166534', marginBottom: 4 }}>
+                  ✓ {t.why}
+                </div>
+                <ul style={{ paddingLeft: 18, fontSize: 13, color: '#334155' }}>
+                  {m.met.map((item) => (
+                    <li key={item.id} style={{ marginBottom: 2 }}>
+                      {item.description}{' '}
+                      {item.source_para && (
+                        <span style={{ color: '#64748b', fontSize: 11 }}>[Para {item.source_para}]</span>
+                      )}
+                    </li>
                   ))}
                 </ul>
               </div>
+            )}
 
-              {m.notes && m.notes.length > 0 && (
+            {/* Rules Unmet */}
+            {m.unmet && m.unmet.length > 0 && (
+              <div style={{ margin: '10px 0' }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: '#dc2626', marginBottom: 4 }}>
+                  ✗ {t.unmet}
+                </div>
+                <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569' }}>
+                  {m.unmet.map((item) => (
+                    <li key={item.id} style={{ marginBottom: 2 }}>
+                      {item.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Rules Missing / Needs More Info */}
+            {m.missing && m.missing.length > 0 && (
+              <div style={{ margin: '10px 0' }}>
+                <div style={{ fontSize: 12.5, fontWeight: 700, color: '#d97706', marginBottom: 4 }}>
+                  ? {t.missing}
+                </div>
+                <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569' }}>
+                  {m.missing.map((item) => (
+                    <li key={item.id} style={{ marginBottom: 2 }}>
+                      {item.description}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            {/* Interactive Document Checklist */}
+            {m.required_documents && m.required_documents.length > 0 && (
+              <div className="checklist-container">
+                <div className="checklist-title">
+                  📋 {t.docs} ({checkedCount}/{totalDocs} {t.readyDocs})
+                </div>
+                {m.required_documents.map((doc, idx) => {
+                  const docKey = `${m.scheme_id}_${idx}`;
+                  const guide = docGuides[doc];
+                  return (
+                    <div key={idx} style={{ marginBottom: 6 }}>
+                      <div className="checklist-item">
+                        <label style={{ display: 'flex', alignItems: 'center', gap: 8, cursor: 'pointer' }}>
+                          <input
+                            type="checkbox"
+                            checked={Boolean(checkedDocs[docKey])}
+                            onChange={() => toggleDoc(docKey)}
+                          />
+                          <span style={{ textDecoration: checkedDocs[docKey] ? 'line-through' : 'none' }}>
+                            {doc}
+                          </span>
+                        </label>
+                        <button
+                          type="button"
+                          className="guide-pill"
+                          onClick={() => fetchDocGuide(doc)}
+                        >
+                          {guide ? '▲ Close' : `ℹ️ ${t.procureGuide}`}
+                        </button>
+                      </div>
+                      {guide && (
+                        <div style={{ background: '#f8fafc', border: '1px solid #cbd5e1', borderRadius: 6, padding: '8px 12px', fontSize: 12, marginTop: 4 }}>
+                          <p style={{ color: '#0f172a' }}>{guide.instructions}</p>
+                          <div style={{ display: 'flex', justifyContent: 'space-between', marginTop: 4, color: '#64748b' }}>
+                            <span>⏱ Processing: {guide.processing_time}</span>
+                            <a href={guide.portal} target="_blank" rel="noreferrer" style={{ color: '#0284c7' }}>
+                              Official Portal ↗
+                            </a>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
+            {/* Evon v3.3 Sovereign Advisory Box */}
+            {counseling[m.scheme_id] && (
+              <div className="evon-counsel-box">
+                <div className="evon-box-header">
+                  <span className="evon-label">✨ {t.evonTitle}</span>
+                  <SpeakButton text={counseling[m.scheme_id]} language={language} />
+                </div>
+                <p className="evon-text">{counseling[m.scheme_id]}</p>
+              </div>
+            )}
+
+            {/* Action Row */}
+            <div className="scheme-actions">
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => fetchCounseling(m.scheme_id)}
+                disabled={counselLoading[m.scheme_id]}
+              >
+                {counselLoading[m.scheme_id] ? t.evonLoading : t.evonExplainBtn}
+              </button>
+
+              <button
+                type="button"
+                className="btn-secondary"
+                onClick={() => setOpen((o) => ({ ...o, [m.scheme_id]: !o[m.scheme_id] }))}
+              >
+                {open[m.scheme_id] ? `▲ ${t.hide}` : `▼ ${t.show}`}
+              </button>
+
+              <a
+                href={m.official_portal}
+                target="_blank"
+                rel="noreferrer"
+                className="btn-portal"
+              >
+                🌐 {t.portal} ↗
+              </a>
+            </div>
+
+            {/* Ask Evon Input */}
+            <form onSubmit={(e) => askQuestion(m.scheme_id, e)} style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+              <input
+                style={{ flex: 1, padding: '6px 12px', fontSize: 12.5, borderRadius: 6, border: '1px solid #cbd5e1' }}
+                placeholder={t.askPlaceholder}
+                value={queries[m.scheme_id] || ''}
+                onChange={(e) => setQueries({ ...queries, [m.scheme_id]: e.target.value })}
+              />
+              <button
+                type="submit"
+                className="btn-secondary"
+                disabled={counselLoading[m.scheme_id] || !(queries[m.scheme_id] || '').trim()}
+              >
+                {t.askBtn}
+              </button>
+            </form>
+
+            {/* Detailed Collapsible Accordion */}
+            {open[m.scheme_id] && (
+              <div style={{ background: '#f8fafc', padding: 14, borderRadius: 8, marginTop: 12, border: '1px solid #e2e8f0' }}>
                 <div style={{ marginBottom: 10 }}>
-                  <ul style={{ paddingLeft: 18, fontSize: 12.5, color: '#64748b' }}>
-                    {m.notes.map((n, i) => (
-                      <li key={i}>{n}</li>
+                  <strong style={{ fontSize: 13, color: '#334155' }}>🎁 {t.benefits}:</strong>
+                  <ul style={{ paddingLeft: 18, fontSize: 13, color: '#475569', marginTop: 4 }}>
+                    {(m.benefits || []).map((b, i) => (
+                      <li key={i}>{benefitText(b)}</li>
                     ))}
                   </ul>
                 </div>
-              )}
 
-              <div style={{ marginBottom: 10 }}>
-                <strong style={{ fontSize: 13, color: '#334155' }}>📝 {t.steps}:</strong>
-                <ol style={{ paddingLeft: 18, fontSize: 13, color: '#475569', marginTop: 4 }}>
-                  {(m.application_steps || []).map((s, i) => (
-                    <li key={i} style={{ marginBottom: 2 }}>{s}</li>
-                  ))}
-                </ol>
-              </div>
+                {m.notes && m.notes.length > 0 && (
+                  <div style={{ marginBottom: 10 }}>
+                    <ul style={{ paddingLeft: 18, fontSize: 12.5, color: '#64748b' }}>
+                      {m.notes.map((n, i) => (
+                        <li key={i}>{n}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
 
-              <div style={{ fontSize: 12, color: '#64748b', borderTop: '1px solid #e2e8f0', paddingTop: 8 }}>
-                <p><strong>{t.deadline}:</strong> {m.deadline_note || t.noDeadline}</p>
-                <p><strong>{t.source}:</strong> {m.source_document}</p>
-                <p><strong>{t.checked}:</strong> {m.last_verified} {m.guideline_validity ? `• ${t.validity}: ${m.guideline_validity}` : ''}</p>
+                <div style={{ marginBottom: 10 }}>
+                  <strong style={{ fontSize: 13, color: '#334155' }}>📝 {t.steps}:</strong>
+                  <ol style={{ paddingLeft: 18, fontSize: 13, color: '#475569', marginTop: 4 }}>
+                    {(m.application_steps || []).map((s, i) => (
+                      <li key={i} style={{ marginBottom: 2 }}>{s}</li>
+                    ))}
+                  </ol>
+                </div>
+
+                <div style={{ fontSize: 12, color: '#64748b', borderTop: '1px solid #e2e8f0', paddingTop: 8 }}>
+                  <p><strong>{t.deadline}:</strong> {m.deadline_note || t.noDeadline}</p>
+                  <p><strong>{t.source}:</strong> {m.source_document}</p>
+                  <p><strong>{t.checked}:</strong> {m.last_verified} {m.guideline_validity ? `• ${t.validity}: ${m.guideline_validity}` : ''}</p>
+                </div>
               </div>
-            </div>
-          )}
-        </article>
-      ))}
+            )}
+          </article>
+        );
+      })}
     </section>
   );
 }

@@ -1,0 +1,75 @@
+{
+  "scheme_id": "pm-jay",
+  "scheme_name": "Ayushman Bharat - Pradhan Mantri Jan Arogya Yojana (AB-PMJAY)",
+  "state": "central",
+  "issuing_authority": "National Health Authority (NHA), Ministry of Health and Family Welfare, Government of India",
+  "target_group": "Economically vulnerable families identified through SECC and NFSA criteria requiring secondary and tertiary healthcare",
+  "eligibility_rules": [
+    {
+      "id": "nationality",
+      "description": "Citizen of India",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "1.1"
+    },
+    {
+      "id": "aadhaar",
+      "description": "Possesses an Aadhaar card or verified enrolment number",
+      "field": "has_aadhaar",
+      "operator": "equals",
+      "value": true,
+      "source_para": "2.3"
+    },
+    {
+      "id": "no_income_tax",
+      "description": "No family member is an active income tax payee",
+      "field": "paid_income_tax_last_year",
+      "operator": "equals",
+      "value": false,
+      "source_para": "Exclusion Criteria D.4"
+    },
+    {
+      "id": "no_govt_employment",
+      "description": "No family member is a regular government or PSU employee with CGHS/ECHS coverage",
+      "field": "govt_or_psu_employee_or_retired",
+      "operator": "equals",
+      "value": false,
+      "source_para": "Exclusion Criteria D.1"
+    },
+    {
+      "id": "family_income",
+      "description": "Annual family income up to Rs 2,50,000 per year",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 250000,
+      "source_para": "NFSA Priority Household Criteria"
+    }
+  ],
+  "benefits": [
+    {
+      "component": "Annual health insurance coverage",
+      "amount": "Rs 5,00,000 per family per year",
+      "amount_per_year": 500000,
+      "duration": "Annual renewal",
+      "instalments": "Cashless and paperless treatment at empanelled public and private hospitals"
+    }
+  ],
+  "required_documents": [
+    "Aadhaar Card",
+    "Ration Card (Food Security Card / White Ration Card)",
+    "Active mobile number linked to Aadhaar"
+  ],
+  "application_steps": [
+    "Visit the Ayushman Beneficiary Portal at beneficiary.nha.gov.in or nearest Common Service Centre (CSC) / Ayushman Mitra at a government hospital",
+    "Enter mobile number and authenticate via Aadhaar OTP to check family inclusion",
+    "Verify family member details and complete biometric e-KYC",
+    "Download Ayushman Card (Golden Card) for instant cashless treatment"
+  ],
+  "official_portal": "https://beneficiary.nha.gov.in",
+  "source_document": "AB-PMJAY Operational Guidelines, National Health Authority",
+  "source_url": "https://pmjay.gov.in/about/pmjay",
+  "last_verified": "2026-11-06",
+  "guideline_validity": "Active National Framework",
+  "open_items": []
+}

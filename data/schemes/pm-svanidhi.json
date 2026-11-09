@@ -1,0 +1,75 @@
+{
+  "scheme_id": "pm-svanidhi",
+  "scheme_name": "PM Street Vendor's AtmaNirbhar Nidhi (PM SVANidhi)",
+  "state": "central",
+  "issuing_authority": "Ministry of Housing and Urban Affairs (MoHUA), Government of India",
+  "target_group": "Street vendors, hawkers, daily wage workers, and self-employed micro-entrepreneurs",
+  "eligibility_rules": [
+    {
+      "id": "nationality",
+      "description": "Citizen of India",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "1.2"
+    },
+    {
+      "id": "occupation",
+      "description": "Engaged in self-employment, street vending, or daily wage informal commerce",
+      "field": "occupation",
+      "operator": "in",
+      "value": ["Self-employed", "Daily wage worker"],
+      "source_para": "2.1"
+    },
+    {
+      "id": "aadhaar",
+      "description": "Possesses Aadhaar card",
+      "field": "has_aadhaar",
+      "operator": "equals",
+      "value": true,
+      "source_para": "3.1"
+    },
+    {
+      "id": "bank_account",
+      "description": "Operates an active bank account in own name",
+      "field": "has_bank_account",
+      "operator": "equals",
+      "value": true,
+      "source_para": "3.2"
+    },
+    {
+      "id": "no_income_tax",
+      "description": "No family member paid income tax last year",
+      "field": "paid_income_tax_last_year",
+      "operator": "equals",
+      "value": false,
+      "source_para": "2.4"
+    }
+  ],
+  "benefits": [
+    {
+      "component": "Collateral-free working capital micro-credit",
+      "amount": "Rs 10,000 in first tranche; up to Rs 50,000 in subsequent tranches with 7% interest subsidy",
+      "amount_per_year": "Up to Rs 50,000 credit limit",
+      "duration": "1 year tenure per tranche",
+      "instalments": "Direct bank credit with monthly cashback incentives on digital UPI transactions"
+    }
+  ],
+  "required_documents": [
+    "Aadhaar Card",
+    "Bank Account Passbook / Statement",
+    "Vending Certificate / Urban Local Body (ULB) Identity Card or Letter of Recommendation (LoR)"
+  ],
+  "application_steps": [
+    "Visit the PM SVANidhi Portal at pmsvanidhi.mohua.gov.in or apply via local Banking Correspondent / MeeSeva / CSC",
+    "Link Aadhaar and verify mobile number via OTP",
+    "Select lending institution (Commercial Bank, Regional Rural Bank, or SHG)",
+    "Submit vending identification details and receive instant in-principle sanction"
+  ],
+  "official_portal": "https://pmsvanidhi.mohua.gov.in",
+  "source_document": "PM SVANidhi Operational Guidelines, Ministry of Housing and Urban Affairs",
+  "source_url": "https://pmsvanidhi.mohua.gov.in/Home/Schemes",
+  "last_verified": "2026-11-06",
+  "guideline_validity": "Extended Scheme Framework",
+  "open_items": []
+}
