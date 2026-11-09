@@ -275,12 +275,8 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
 
   const key = process.env.GNANI_API_KEY;
   if (!key) {
-    console.warn('GNANI_API_KEY not set. Using synthetic sample transcript for local simulation.');
-    // Provides realistic sample transcript for testing when API key is missing
-    const simulated = lang === 'te'
-      ? 'నేను కాలేజీ స్టూడెంట్, నాకు స్కాలర్‌షిప్ కావాలి'
-      : 'I am a college student from Telangana looking for scholarships';
-    return res.json({ transcript: simulated, detected_language: lang === 'te' ? 'te-IN' : 'en-IN', source: 'simulated-prisma-v3.0' });
+    console.error('GNANI_API_KEY is not set in ../.env');
+    return res.status(502).json({ error: 'speech_unavailable' });
   }
 
   let wav;

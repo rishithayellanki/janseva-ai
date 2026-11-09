@@ -1,8 +1,5 @@
 // Text to speech through Gnani Timbre v3.0. The API key stays on the backend.
 // Gnani allows one active request at a time, so requests are queued.
-const fs = require('fs');
-const path = require('path');
-
 let queue = Promise.resolve();
 
 const VOICE = 'Lakshmi';
@@ -30,12 +27,7 @@ module.exports = function register(app) {
 
     const key = process.env.GNANI_API_KEY;
     if (!key) {
-      console.warn('GNANI_API_KEY not set. Using local synthesized audio fixture for seamless testing.');
-      const fixture = path.join(__dirname, '..', 'test-tts.wav');
-      if (fs.existsSync(fixture)) {
-        res.set('Content-Type', 'audio/wav');
-        return res.send(fs.readFileSync(fixture));
-      }
+      console.error('GNANI_API_KEY is not set in ../.env');
       return res.status(502).json({ error: 'speech_unavailable' });
     }
 
@@ -48,7 +40,7 @@ module.exports = function register(app) {
             text,
             voice: VOICE,
             model: MODEL,
-            language: LANGUAGE[lang],
+            language: LANGUAGE[lang] || 'en-IN',
             speed: 1.0,
             audio_config: { sample_rate: 24000, num_channels: 1, sample_width: 2, encoding: 'linear_pcm', container: 'wav' },
           }),
@@ -69,12 +61,6 @@ module.exports = function register(app) {
     queue = job;
     const result = await job;
     if (!result.ok) {
-      // Fallback to local audio fixture if Gnani endpoint is temporarily unreachable
-      const fixture = path.join(__dirname, '..', 'test-tts.wav');
-      if (fs.existsSync(fixture)) {
-        res.set('Content-Type', 'audio/wav');
-        return res.send(fs.readFileSync(fixture));
-      }
       return res.status(502).json({ error: 'speech_unavailable' });
     }
     res.set('Content-Type', 'audio/wav').send(result.audio);

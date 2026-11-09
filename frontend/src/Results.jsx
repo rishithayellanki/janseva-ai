@@ -208,7 +208,7 @@ export default function Results({ sessionId, language = 'en' }) {
         <div style={{ marginTop: 12, display: 'flex', alignItems: 'center', gap: 10 }}>
           <SpeakButton
             text={summaryText(matches, language)}
-            language={language === 'te' ? 'auto' : 'en'}
+            language={language}
           />
           <span style={{ fontSize: 12, color: '#64748b' }}>
             🔊 {language === 'te' ? 'మొత్తం ఫలితాలను వినండి (Gnani Timbre)' : 'Listen to full results summary (Gnani Timbre)'}
@@ -336,7 +336,7 @@ export default function Results({ sessionId, language = 'en' }) {
             <div className="evon-counsel-box">
               <div className="evon-box-header">
                 <span className="evon-label">✨ {t.evonTitle}</span>
-                <SpeakButton text={counseling[m.scheme_id]} language={language === 'te' ? 'auto' : 'en'} />
+                <SpeakButton text={counseling[m.scheme_id]} language={language} />
               </div>
               <p className="evon-text">{counseling[m.scheme_id]}</p>
             </div>
