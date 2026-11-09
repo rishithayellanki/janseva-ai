@@ -5,20 +5,97 @@
   "issuing_authority": "Ministry of Social Justice and Empowerment, Government of India",
   "target_group": "SC students pursuing post-matriculation courses in India",
   "eligibility_rules": [
-    {"id": "category", "description": "Belongs to a Scheduled Caste notified for the state/UT where permanently settled or domiciled", "field": "category", "operator": "equals", "value": "SC", "source_para": "5.2"},
-    {"id": "nationality", "description": "Indian national", "field": "is_indian_national", "operator": "equals", "value": true, "source_para": "5.1"},
-    {"id": "qualification", "description": "Passed matriculation or higher secondary or a higher examination", "field": "passed_matriculation", "operator": "equals", "value": true, "source_para": "5.2"},
-    {"id": "family_income", "description": "Parents' or guardian's income from all sources up to Rs 2,50,000 per year in the last financial year", "field": "family_income_per_year", "operator": "lte", "value": 250000, "source_para": "5.3"},
-    {"id": "recognised_course", "description": "Recognised post-matric course at an institution with an AISHE or UDISE code; not a second course at the same stage", "field": "course_recognised", "operator": "equals", "value": true, "source_para": "4.1, 5.5"},
-    {"id": "no_other_scholarship", "description": "Not holding another scholarship or stipend at the same time", "field": "has_other_scholarship", "operator": "equals", "value": false, "source_para": "5.8"},
-    {"id": "renewal_attendance", "description": "Renewal: at least 75% attendance and satisfactory academic performance each year", "field": "attendance_percent", "operator": "gte", "value": 75, "applies_to": "renewal", "source_para": "12.1"}
+    {
+      "id": "category",
+      "description": "Belongs to a Scheduled Caste notified for the state/UT where permanently settled or domiciled",
+      "field": "category",
+      "operator": "equals",
+      "value": "SC",
+      "source_para": "5.2"
+    },
+    {
+      "id": "nationality",
+      "description": "Indian national",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "5.1"
+    },
+    {
+      "id": "qualification",
+      "description": "Passed matriculation or higher secondary or a higher examination",
+      "field": "passed_matriculation",
+      "operator": "equals",
+      "value": true,
+      "source_para": "5.2"
+    },
+    {
+      "id": "family_income",
+      "description": "Parents' or guardian's income from all sources up to Rs 2,50,000 per year in the last financial year",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 250000,
+      "source_para": "5.3"
+    },
+    {
+      "id": "recognised_course",
+      "description": "Recognised post-matric course at an institution with an AISHE or UDISE code; not a second course at the same stage",
+      "field": "course_recognised",
+      "operator": "equals",
+      "value": true,
+      "source_para": "4.1, 5.5"
+    },
+    {
+      "id": "no_other_scholarship",
+      "description": "Not holding another scholarship or stipend at the same time",
+      "field": "has_other_scholarship",
+      "operator": "equals",
+      "value": false,
+      "source_para": "5.8"
+    },
+    {
+      "id": "renewal_attendance",
+      "description": "Renewal: at least 75% attendance and satisfactory academic performance each year",
+      "field": "attendance_percent",
+      "operator": "gte",
+      "value": 75,
+      "applies_to": "renewal",
+      "source_para": "12.1"
+    }
   ],
   "benefits": [
-    {"component": "Compulsory non-refundable fees (tuition etc.), via Freeship Card or DBT", "amount": "As fixed by the state fee committee", "source_para": "7.1(i)"},
-    {"component": "Academic allowance per year", "hostellers": {"Group 1": 13500, "Group 2": 9500, "Group 3": 6000, "Group 4": 4000}, "day_scholars": {"Group 1": 7000, "Group 2": 6500, "Group 3": 3000, "Group 4": 2500}, "divyang_extra": "10%", "source_para": "7.1(ii)"}
+    {
+      "component": "Compulsory non-refundable fees (tuition etc.), via Freeship Card or DBT",
+      "amount": "As fixed by the state fee committee",
+      "source_para": "7.1(i)"
+    },
+    {
+      "component": "Academic allowance per year",
+      "hostellers": {
+        "Group 1": 13500,
+        "Group 2": 9500,
+        "Group 3": 6000,
+        "Group 4": 4000
+      },
+      "day_scholars": {
+        "Group 1": 7000,
+        "Group 2": 6500,
+        "Group 3": 3000,
+        "Group 4": 2500
+      },
+      "divyang_extra": "10%",
+      "source_para": "7.1(ii)"
+    }
   ],
   "course_groups": "Group 1: degree and PG professional courses (medicine, engineering etc.). Group 2: other professional courses (pharmacy, nursing etc.). Group 3: graduate and PG courses not in Groups 1 or 2 (BA, BSc, BCom etc.). Group 4: post-matric non-degree courses (Classes XI-XII, ITI, 3-year diploma).",
-  "required_documents": ["Aadhaar card", "Caste certificate", "Income certificate issued by the authority the state designates", "Previous marksheets and certificates", "Passport-size photograph", "Bank account in the student's name, Aadhaar-seeded"],
+  "required_documents": [
+    "Aadhaar card",
+    "Caste certificate",
+    "Income certificate issued by the authority the state designates",
+    "Previous marksheets and certificates",
+    "Passport-size photograph",
+    "Bank account in the student's name, Aadhaar-seeded"
+  ],
   "documents_note": "Documents may be verified automatically through DigiLocker or linked databases (para 13(d)).",
   "application_steps": [
     "Register on the National Scholarship Portal (scholarships.gov.in) with Aadhaar and course details to get a Freeship Card (para 8.2)",
@@ -34,5 +111,8 @@
   "guideline_validity": "2020-21 to 2025-26",
   "last_verified": "2026-11-06",
   "status": "checked_against_uploaded_guideline",
-  "open_items": ["Confirm 2026-27 rules on NSP, since the guideline validity ends 2025-26"]
+  "open_items": [
+    "Confirm 2026-27 rules on NSP, since the guideline validity ends 2025-26"
+  ],
+  "source_url": "https://scholarships.gov.in/public/schemeGuidelines/Postmatric_SC.pdf"
 }

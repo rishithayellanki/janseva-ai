@@ -5,21 +5,87 @@
   "issuing_authority": "Department of Higher Education, Ministry of Education, Government of India",
   "target_group": "Meritorious students from low-income families in regular graduate, postgraduate or professional degree courses",
   "eligibility_rules": [
-    {"id": "class12_percentile", "description": "Above the 80th percentile of successful candidates in the relevant stream of the Class XII board examination", "field": "class12_percentile", "operator": "gt", "value": 80, "source_para": "4(i)", "note": "Onboarding does not collect this yet; ask only if the user has it"},
-    {"id": "family_income", "description": "Gross parental or family income from all sources up to Rs 4,50,000 per year", "field": "family_income_per_year", "operator": "lte", "value": 450000, "source_para": "4(v)"},
-    {"id": "regular_course", "description": "Pursuing a regular degree course, not correspondence, distance or diploma", "field": "course_mode", "operator": "equals", "value": "regular_degree", "source_para": "4(ii)"},
-    {"id": "recognised_institution", "description": "Course at an institution recognised by AICTE or the relevant regulatory body, with a valid AISHE code", "field": "institution_recognised", "operator": "equals", "value": true, "source_para": "4(iii), 4(vi)"},
-    {"id": "no_other_scholarship", "description": "Not availing any other scholarship scheme, including state schemes and fee waiver or reimbursement", "field": "has_other_scholarship", "operator": "equals", "value": false, "source_para": "4(iv)"},
-    {"id": "renewal_marks", "description": "Renewal: at least 50% marks in the annual examination and 75% attendance", "field": "annual_marks_percent", "operator": "gte", "value": 50, "applies_to": "renewal", "source_para": "4(viii)"}
+    {
+      "id": "class12_percentile",
+      "description": "Above the 80th percentile of successful candidates in the relevant stream of the Class XII board examination",
+      "field": "class12_percentile",
+      "operator": "gt",
+      "value": 80,
+      "source_para": "4(i)",
+      "note": "Onboarding does not collect this yet; ask only if the user has it"
+    },
+    {
+      "id": "family_income",
+      "description": "Gross parental or family income from all sources up to Rs 4,50,000 per year",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 450000,
+      "source_para": "4(v)"
+    },
+    {
+      "id": "regular_course",
+      "description": "Pursuing a regular degree course, not correspondence, distance or diploma",
+      "field": "course_mode",
+      "operator": "equals",
+      "value": "regular_degree",
+      "source_para": "4(ii)"
+    },
+    {
+      "id": "recognised_institution",
+      "description": "Course at an institution recognised by AICTE or the relevant regulatory body, with a valid AISHE code",
+      "field": "institution_recognised",
+      "operator": "equals",
+      "value": true,
+      "source_para": "4(iii), 4(vi)"
+    },
+    {
+      "id": "no_other_scholarship",
+      "description": "Not availing any other scholarship scheme, including state schemes and fee waiver or reimbursement",
+      "field": "has_other_scholarship",
+      "operator": "equals",
+      "value": false,
+      "source_para": "4(iv)"
+    },
+    {
+      "id": "renewal_marks",
+      "description": "Renewal: at least 50% marks in the annual examination and 75% attendance",
+      "field": "annual_marks_percent",
+      "operator": "gte",
+      "value": 50,
+      "applies_to": "renewal",
+      "source_para": "4(viii)"
+    }
   ],
   "benefits": [
-    {"component": "Graduation, first 3 years", "amount_per_year": 12000, "source_para": "7"},
-    {"component": "Post-graduation", "amount_per_year": 20000, "source_para": "7"},
-    {"component": "Five-year professional course, 4th and 5th years", "amount_per_year": 20000, "source_para": "7"},
-    {"component": "Technical courses such as B.Tech and B.Engg", "amount_per_year": "Rs 12,000 in years 1-3; Rs 20,000 in year 4 (graduation level only)", "source_para": "7"}
+    {
+      "component": "Graduation, first 3 years",
+      "amount_per_year": 12000,
+      "source_para": "7"
+    },
+    {
+      "component": "Post-graduation",
+      "amount_per_year": 20000,
+      "source_para": "7"
+    },
+    {
+      "component": "Five-year professional course, 4th and 5th years",
+      "amount_per_year": 20000,
+      "source_para": "7"
+    },
+    {
+      "component": "Technical courses such as B.Tech and B.Engg",
+      "amount_per_year": "Rs 12,000 in years 1-3; Rs 20,000 in year 4 (graduation level only)",
+      "source_para": "7"
+    }
   ],
   "slot_note": "Only about 82,000 fresh scholarships a year, allocated by state board and stream. Meeting the criteria does not guarantee an award (paras 2 and 3).",
-  "required_documents": ["Aadhaar (for NSP registration and DBT)", "Income certificate (fresh applicants only, para 4(v))", "Caste certificate if claiming reservation (verified through DigiLocker, para 6(i))", "Academic qualification proof (verified through DigiLocker, para 6(i))", "Bank account in the student's name (para 8)"],
+  "required_documents": [
+    "Aadhaar (for NSP registration and DBT)",
+    "Income certificate (fresh applicants only, para 4(v))",
+    "Caste certificate if claiming reservation (verified through DigiLocker, para 6(i))",
+    "Academic qualification proof (verified through DigiLocker, para 6(i))",
+    "Bank account in the student's name (para 8)"
+  ],
   "application_steps": [
     "Register on NSP (scholarships.gov.in) and apply online only (paras 4(ix), 6(i))",
     "The institution verifies first, then the state nodal agency (para 6(v))",
@@ -33,5 +99,8 @@
   "source_document": "PM-USP CSSS guidelines, applicable from 2022-23 onwards (uploaded Guidelines_DOHE_CSSS.pdf)",
   "last_verified": "2026-11-06",
   "status": "checked_against_uploaded_guideline",
-  "open_items": ["Confirm NSP timelines for 2026-27"]
+  "open_items": [
+    "Confirm NSP timelines for 2026-27"
+  ],
+  "source_url": "https://scholarships.gov.in/public/schemeGuidelines/Guidelines_DOHE_CSSS.pdf"
 }

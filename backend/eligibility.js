@@ -126,6 +126,10 @@ function evaluateScheme(record, d) {
     last_verified: record.last_verified,
     deadline_note: record.deadline_note || '',
     open_items: record.open_items || [],
+    benefits: record.benefits || [],
+    source_url: record.source_url || null,
+    guideline_validity: record.guideline_validity || null,
+    notes: [record.slot_note, record.coverage_note, record.documents_note, record.course_groups].filter(Boolean),
   };
 }
 

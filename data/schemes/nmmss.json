@@ -5,18 +5,78 @@
   "issuing_authority": "Department of School Education and Literacy, Ministry of Education, Government of India",
   "target_group": "Meritorious students from economically weaker families studying in Class IX in government, government-aided or local body schools",
   "eligibility_rules": [
-    {"id": "school_type", "description": "Regular student in a government, government-aided or local body school (Kendriya Vidyalayas, Navodaya Vidyalayas, residential government schools and private schools are excluded)", "field": "school_type", "operator": "in", "value": ["government", "government_aided", "local_body"], "source_para": "1.2, 2.2"},
-    {"id": "family_income", "description": "Parental income from all sources up to Rs 3,50,000 per year", "field": "family_income_per_year", "operator": "lte", "value": 350000, "source_para": "Annexure-II 1.1; letter para 2(i)"},
-    {"id": "selection_test", "description": "Passed the state-level MAT and SAT selection test with at least 40% in aggregate (32% for SC/ST)", "field": "passed_state_selection_test", "operator": "equals", "value": true, "source_para": "3.1"},
-    {"id": "previous_class_marks", "description": "At least 55% marks in the qualifying exam (5% relaxation for SC/ST)", "field": "previous_class_marks_percent", "operator": "gte", "value": 55, "source_para": "2.2 and 3.2", "status": "conflict_in_guideline", "note": "Para 2.2 says Class VII; para 3.2 says Class VIII. Confirm which applies."},
-    {"id": "renewal_marks", "description": "Renewal: at least 60% in Class X (5% relaxation for SC/ST) and clear promotion in the first attempt", "field": "class10_marks_percent", "operator": "gte", "value": 60, "applies_to": "renewal", "source_para": "4.4, 6.4-6.5"},
-    {"id": "single_central_scholarship", "description": "Cannot hold another central government scholarship at the same time", "field": "has_other_central_scholarship", "operator": "equals", "value": false, "source_para": "4.1"}
+    {
+      "id": "school_type",
+      "description": "Regular student in a government, government-aided or local body school (Kendriya Vidyalayas, Navodaya Vidyalayas, residential government schools and private schools are excluded)",
+      "field": "school_type",
+      "operator": "in",
+      "value": [
+        "government",
+        "government_aided",
+        "local_body"
+      ],
+      "source_para": "1.2, 2.2"
+    },
+    {
+      "id": "family_income",
+      "description": "Parental income from all sources up to Rs 3,50,000 per year",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 350000,
+      "source_para": "Annexure-II 1.1; letter para 2(i)"
+    },
+    {
+      "id": "selection_test",
+      "description": "Passed the state-level MAT and SAT selection test with at least 40% in aggregate (32% for SC/ST)",
+      "field": "passed_state_selection_test",
+      "operator": "equals",
+      "value": true,
+      "source_para": "3.1"
+    },
+    {
+      "id": "previous_class_marks",
+      "description": "At least 55% marks in the qualifying exam (5% relaxation for SC/ST)",
+      "field": "previous_class_marks_percent",
+      "operator": "gte",
+      "value": 55,
+      "source_para": "2.2 and 3.2",
+      "status": "conflict_in_guideline",
+      "note": "Para 2.2 says Class VII; para 3.2 says Class VIII. Confirm which applies."
+    },
+    {
+      "id": "renewal_marks",
+      "description": "Renewal: at least 60% in Class X (5% relaxation for SC/ST) and clear promotion in the first attempt",
+      "field": "class10_marks_percent",
+      "operator": "gte",
+      "value": 60,
+      "applies_to": "renewal",
+      "source_para": "4.4, 6.4-6.5"
+    },
+    {
+      "id": "single_central_scholarship",
+      "description": "Cannot hold another central government scholarship at the same time",
+      "field": "has_other_central_scholarship",
+      "operator": "equals",
+      "value": false,
+      "source_para": "4.1"
+    }
   ],
   "benefits": [
-    {"component": "Scholarship", "amount_per_year": 12000, "monthly": 1000, "duration": "Classes IX to XII, maximum four years", "source_para": "1.3, 6.2"}
+    {
+      "component": "Scholarship",
+      "amount_per_year": 12000,
+      "monthly": 1000,
+      "duration": "Classes IX to XII, maximum four years",
+      "source_para": "1.3, 6.2"
+    }
   ],
-  "state_quota": {"Telangana": 2921, "source": "Annexure-I (share of 1,00,000 national scholarships)"},
-  "required_documents": ["Not listed in the guideline. Confirm on the state notice and NSP."],
+  "state_quota": {
+    "Telangana": 2921,
+    "source": "Annexure-I (share of 1,00,000 national scholarships)"
+  },
+  "required_documents": [
+    "Not listed in the guideline. Confirm on the state notice and NSP."
+  ],
   "application_steps": [
     "Appear in the state-conducted selection test (MAT and SAT) for Class VIII students (para 2.1). The test is held every November (para 7.0).",
     "If selected, apply on NSP. The institution and then the state verify the application (para 4.3).",
@@ -30,5 +90,10 @@
   "guideline_validity": "2021-22 to 2025-26",
   "last_verified": "2026-11-06",
   "status": "checked_against_uploaded_guideline",
-  "open_items": ["Resolve the Class VII vs Class VIII marks conflict", "Confirm 2026-27 selection test and NSP timelines", "Confirm the document list on the state notice"]
+  "open_items": [
+    "Resolve the Class VII vs Class VIII marks conflict",
+    "Confirm 2026-27 selection test and NSP timelines",
+    "Confirm the document list on the state notice"
+  ],
+  "source_url": "https://scholarships.gov.in/public/schemeGuidelines/NMMSSGuidelines.pdf"
 }
