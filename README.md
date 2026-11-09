@@ -28,18 +28,44 @@ Over 800 million Indian citizens are entitled to Central and State government we
 | **Text-to-Speech** | **Gnani Timbre v3.0** | Synthesizes 24 kHz audio via `POST /api/v1/tts/inference` with voice **Lakshmi**, featuring native Indian numeral and lakh/crore cadence. |
 | **Reasoning & Advisory** | **Gnani Evon v3.3** | 30B MoE Indian-language reasoning model providing grounded citizen counseling and document procurement guidance. |
 | **Policy Engine** | **Deterministic Gazette Engine** | Evaluates 3 distinct states: **Eligible**, **Needs more information**, **Not eligible** against official government criteria. |
-| **Frontend** | **React 19 + Vite** | High-accessibility mobile-first UI with real-time audio visualizer waveform, bilingual toggle, and interactive document checklist. |
+| **Frontend** | **React 19 + Vite** | High-accessibility sovereign multi-screen UI with real-time audio visualizer waveform, bilingual toggle, printable welfare slip, and interactive document checklist. |
 | **Backend** | **Node.js + SQLite** | Audio transcoding via FFmpeg, Indic number/entity normalizer, Levenshtein state matcher, and SQLite session store. |
 
 ---
 
-## 📋 Verified Schemes Covered
+## 📋 10 Verified National & State Schemes
 
 1. **PMS-SC**: Post-Matric Scholarship for SC Students *(Ministry of Social Justice and Empowerment)*
-2. **PM-USP CSSS**: Central Sector Scheme of Scholarship for College and University Students *(Ministry of Education)*
-3. **NMMSS**: National Means-cum-Merit Scholarship Scheme *(Ministry of Education)*
-4. **PM-KISAN**: Pradhan Mantri Kisan Samman Nidhi *(Ministry of Agriculture & Farmers Welfare)*
-5. **PMFBY**: Pradhan Mantri Fasal Bima Yojana *(Ministry of Agriculture & Farmers Welfare)*
+2. **PMS-OBC**: Post-Matric Scholarship for OBC/EBC/DNT Students *(Ministry of Social Justice and Empowerment)*
+3. **PM-USP CSSS**: Central Sector Scheme of Scholarship for College and University Students *(Ministry of Education)*
+4. **NMMSS**: National Means-cum-Merit Scholarship Scheme *(Ministry of Education)*
+5. **PM-KISAN**: Pradhan Mantri Kisan Samman Nidhi *(Ministry of Agriculture & Farmers Welfare)*
+6. **PMFBY**: Pradhan Mantri Fasal Bima Yojana *(Ministry of Agriculture & Farmers Welfare)*
+7. **PM-KMY**: Pradhan Mantri Kisan Maan Dhan Yojana — Farmers Pension *(MoA&FW / LIC)*
+8. **PM-JAY**: Ayushman Bharat National Health Protection Scheme — ₹5 Lakh/yr family health cover *(NHA / MoHFW)*
+9. **PM SVANidhi**: PM Street Vendor's AtmaNirbhar Nidhi — Micro-credit working capital *(MoHUA)*
+10. **PMJJBY**: Pradhan Mantri Jeevan Jyoti Bima Yojana — Life Insurance Cover *(DFS / MoF)*
+
+---
+
+## 📱 Multi-Screen Institutional Architecture
+
+JanSeva AI features 5 distinct screens, elevating the application into an institutional-grade Digital Public Infrastructure platform:
+- **🏛️ National Portal Hub (`HomeView`)**: Hero banner, live statutory metrics strip, 5 DPDP synthetic citizen presets, and key sovereign pillars.
+- **🎙️ Conversational Assistant (`AssistantView`)**: Progress stepper (`(x/10) • %`), real-time animated soundwave visualizer, voice mic controls, and citizen profile chips.
+- **📋 Statutory Welfare Results (`Results`)**: Verified entitlement cards, statutory unmet clauses, Evon v3.3 grounded explanations, MeeSeva procurement routes, and printable Citizen Welfare Entitlement Slip (`@media print`).
+- **📚 Gazette Scheme Knowledge Vault (`SchemeDirectory`)**: Instant search and categorical filtering across all 10 verified schemes with official Gazette citation references.
+- **🔬 Gnani AI Architecture Studio (`GnaniStudio`)**: Live systems diagnostic panel for competition judges with Prisma STT latency meter (~380ms), Timbre v3.0 voice tester, Evon prompt grounding inspector, and DPDP privacy audit.
+
+---
+
+## ⚡ 5 DPDP Synthetic Demo Personas (1-Click Validation)
+For instantaneous hackathon video recording and judges review without manual typing:
+1. **Ananya**: 20 yrs, SC College Student, Telangana $\rightarrow$ *Eligible for PMS-SC*
+2. **Ramesh**: 42 yrs, BC Farmer, Andhra Pradesh $\rightarrow$ *Eligible for PM-KISAN & PMFBY*
+3. **Kavitha**: 14 yrs, BC Govt School Student, Telangana $\rightarrow$ *Eligible for NMMSS*
+4. **Lakshmi**: 36 yrs, Self-employed Street Vendor, Telangana $\rightarrow$ *Eligible for PM SVANidhi & PM-JAY*
+5. **Narayana**: 34 yrs, Marginal Farmer, Telangana $\rightarrow$ *Eligible for PM-KMY, PM-KISAN & PMJJBY*
 
 ---
 
@@ -111,12 +137,17 @@ janseva-ai-handover/
 │   └── package.json
 ├── frontend/
 │   ├── src/
-│   │   ├── App.jsx            # Voice/text chat interface & presets
-│   │   ├── Results.jsx        # Scheme cards, Evon advisory & document checklist
+│   │   ├── App.jsx            # Multi-screen router & session coordinator
+│   │   ├── Navbar.jsx         # Institutional sovereign top navigation & language toggle
+│   │   ├── HomeView.jsx       # National welfare portal hub & DPDP presets
+│   │   ├── AssistantView.jsx  # Conversational voice assistant & audio visualizer
+│   │   ├── Results.jsx        # Scheme cards, Evon advisory & printable slip
+│   │   ├── SchemeDirectory.jsx# Gazette knowledge vault with search & category filters
+│   │   ├── GnaniStudio.jsx    # Live systems inspector & telemetry for judges
 │   │   ├── SpeakButton.jsx    # Audio playback button with voice synthesis
 │   │   ├── speak.js           # Audio player & stream manager
 │   │   ├── summary.js         # Bilingual audio summary generator
-│   │   └── index.css          # Institutional Sovereign UI design
+│   │   └── index.css          # Institutional Sovereign UI design & print styles
 │   ├── index.html
 │   └── package.json
 ├── data/
