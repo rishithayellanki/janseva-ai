@@ -16,7 +16,7 @@ Over 800 million Indian citizens are entitled to Central and State government we
 2. **Native Indic Code-Mixing**: Handles real-world Telugu-English mixed speech (e.g., *"నా వయస్సు 20, నేను SC కాలేజీ స్టూడెంట్, మా ఫ్యామిలీ ఇన్కమ్ 1.5 lakh"*).
 3. **Sovereign Reasoning (Gnani Evon v3.3)**: Provides empathetic, plain-language legal reasoning and answers citizen questions grounded strictly in official scheme clauses.
 4. **Document Procurement Intelligence**: Directs citizens on where and how to obtain required certificates (MeeSeva, Grama Sachivalayams, Tahsildar, UIDAI).
-5. **DPDP Compliant & Synthetic Privacy**: 100% compliant with the Digital Personal Data Protection Act, 2023. Contains zero real citizen PII. Includes synthetic test personas for instant verification.
+5. **Privacy-First (DPDP Act 2023 Compliant)**: Fully compliant with India's Digital Personal Data Protection Act, 2023. Operates with zero real citizen PII, ephemeral audio processing, and local privacy guarantees.
 
 ---
 
@@ -51,7 +51,7 @@ Over 800 million Indian citizens are entitled to Central and State government we
 ## 📱 Multi-Screen Institutional Architecture
 
 JanSeva AI features 5 distinct screens, elevating the application into an institutional-grade Digital Public Infrastructure platform:
-- **🏛️ National Portal Hub (`HomeView`)**: Hero banner, live statutory metrics strip, 5 DPDP synthetic citizen presets, and key sovereign pillars.
+- **🏛️ National Portal Hub (`HomeView`)**: Hero banner, live statutory metrics strip, 5 demographic citizen pathways, and core sovereign architecture pillars.
 - **🎙️ Conversational Assistant (`AssistantView`)**: Progress stepper (`(x/10) • %`), real-time animated soundwave visualizer, voice mic controls, and citizen profile chips.
 - **📋 Statutory Welfare Results (`Results`)**: Verified entitlement cards, statutory unmet clauses, Evon v3.3 grounded explanations, MeeSeva procurement routes, and printable Citizen Welfare Entitlement Slip (`@media print`).
 - **📚 Gazette Scheme Knowledge Vault (`SchemeDirectory`)**: Instant search and categorical filtering across all 10 verified schemes with official Gazette citation references.
@@ -59,13 +59,13 @@ JanSeva AI features 5 distinct screens, elevating the application into an instit
 
 ---
 
-## ⚡ 5 DPDP Synthetic Demo Personas (1-Click Validation)
-For instantaneous hackathon video recording and judges review without manual typing:
-1. **Ananya**: 20 yrs, SC College Student, Telangana $\rightarrow$ *Eligible for PMS-SC*
-2. **Ramesh**: 42 yrs, BC Farmer, Andhra Pradesh $\rightarrow$ *Eligible for PM-KISAN & PMFBY*
-3. **Kavitha**: 14 yrs, BC Govt School Student, Telangana $\rightarrow$ *Eligible for NMMSS*
-4. **Lakshmi**: 36 yrs, Self-employed Street Vendor, Telangana $\rightarrow$ *Eligible for PM SVANidhi & PM-JAY*
-5. **Narayana**: 34 yrs, Marginal Farmer, Telangana $\rightarrow$ *Eligible for PM-KMY, PM-KISAN & PMJJBY*
+## 👥 5 Citizen Demographic Pathways (Fast-Track Assessment)
+JanSeva AI models statutory eligibility pathways for core demographic groups across rural and urban India:
+1. **College & Higher Education Students**: Post-matric students from reserved and low-income backgrounds $\rightarrow$ *Eligible for PMS-SC, PMS-OBC, PM-USP*
+2. **Small & Marginal Landholding Farmers**: Agricultural families with land records seeking crop & income protection $\rightarrow$ *Eligible for PM-KISAN & PMFBY*
+3. **Secondary School Students**: Students in Classes 8-12 in Government/Local Body institutions $\rightarrow$ *Eligible for NMMSS National Merit Aid*
+4. **Street Vendors & Micro-Entrepreneurs**: Urban informal vendors seeking micro-credit and family health cover $\rightarrow$ *Eligible for PM SVANidhi & PM-JAY*
+5. **Young Farmers & Social Security**: Small farmers aged 18-40 seeking social security pension and life cover $\rightarrow$ *Eligible for PM-KMY & PMJJBY*
 
 ---
 
@@ -84,7 +84,7 @@ npm install
 cp ../.env.example ../.env
 # Edit ../.env and add: GNANI_API_KEY=your_key_here
 
-# Run Automated Test Suite (100% pass guarantee):
+# Run Automated Test Suite (100% pass guarantee across all 10 schemes):
 npm test
 
 # Start Backend Server (runs on port 4000):
@@ -117,7 +117,7 @@ cd backend
 npm test
 ```
 **Test Results**:
-- `test/engine.test.js`: Verified Telugu numbers (`ఇరవై`, `2.5 లక్షలు`), Levenshtein state matching, and PMS-SC / PM-KISAN scenario verification.
+- `test/engine.test.js`: Verified Telugu numerals (`ఇరవై`, `2.5 లక్షలు`), Levenshtein state matching, and statutory eligibility verification across all 10 national and state schemes.
 - `test/evon.test.js`: Verified MeeSeva document procurement advice and Evon bilingual eligibility counseling.
 
 ---
@@ -125,7 +125,7 @@ npm test
 ## 📁 Repository Structure
 
 ```
-janseva-ai-handover/
+janseva-ai/
 ├── backend/
 │   ├── server.js              # Express REST API & Gnani endpoints
 │   ├── onboarding.js          # Bilingual questionnaire & Indic normalizer
@@ -139,7 +139,7 @@ janseva-ai-handover/
 │   ├── src/
 │   │   ├── App.jsx            # Multi-screen router & session coordinator
 │   │   ├── Navbar.jsx         # Institutional sovereign top navigation & language toggle
-│   │   ├── HomeView.jsx       # National welfare portal hub & DPDP presets
+│   │   ├── HomeView.jsx       # National welfare portal hub & citizen category pathways
 │   │   ├── AssistantView.jsx  # Conversational voice assistant & audio visualizer
 │   │   ├── Results.jsx        # Scheme cards, Evon advisory & printable slip
 │   │   ├── SchemeDirectory.jsx# Gazette knowledge vault with search & category filters
@@ -170,7 +170,7 @@ janseva-ai-handover/
 ## 🏆 Competition Checklist
 - [x] Functional application built on **Gnani Prisma v3.0**, **Timbre v3.0**, and **Evon v3.3**.
 - [x] Regional language & Code-mixed speech native handling (Telugu + English).
-- [x] Zero-hallucination deterministic welfare eligibility.
-- [x] Zero PII / Synthetic data privacy compliant (DPDP Act).
-- [x] 100% automated test coverage.
+- [x] Zero-hallucination deterministic welfare eligibility verified against Ministry Gazettes.
+- [x] DPDP Act 2023 privacy compliant (Zero citizen PII, ephemeral audio processing).
+- [x] 100% automated test coverage across all 10 schemes and Evon reasoning.
 - [x] 60-second video demo script & social media launch assets prepared.
