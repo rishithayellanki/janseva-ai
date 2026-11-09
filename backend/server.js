@@ -142,6 +142,29 @@ const DEMO_PRESETS = [
       receives_pension: false,
     },
   },
+  {
+    id: 'farmer-kmy',
+    name: 'Narayana (Marginal Farmer, 34 yrs)',
+    name_te: 'నారాయణ (చిన్నకారు రైతు, 34 సం.)',
+    badge: 'PM-KMY, PM-KISAN & PMJJBY',
+    description: '34 yrs, Farmer, Telangana, Family Income ₹1-2L, Land Owned < 2019',
+    description_te: '34 సం., రైతు, తెలంగాణ, వార్షిక ఆదాయం ₹1-2 లక్షలు, భూమి హక్కుదారు',
+    profile: {
+      age: 34,
+      occupation: 'Farmer',
+      state: 'Telangana',
+      income_range: '1_to_2_lakh',
+      category: 'OBC',
+      is_indian_national: true,
+      has_aadhaar: true,
+      has_bank_account: true,
+      owns_land: true,
+      land_before_2019: true,
+      paid_income_tax: false,
+      family_excluded_group: false,
+      receives_pension: false,
+    },
+  },
 ];
 
 app.get('/api/health', (req, res) => {
@@ -231,6 +254,11 @@ app.post('/api/sessions/:id/answer', (req, res) => {
 });
 
 // Scheme matches for a session. Scheme records come from the database.
+app.get('/api/schemes', (req, res) => {
+  const records = db.prepare('SELECT data_json FROM schemes').all().map((r) => JSON.parse(r.data_json));
+  res.json(records);
+});
+
 app.get('/api/sessions/:id/matches', (req, res) => {
   const row = db.prepare('SELECT * FROM sessions WHERE session_id = ?').get(req.params.id);
   if (!row) return res.status(404).json({ error: 'session_not_found' });

@@ -1,0 +1,87 @@
+{
+  "scheme_id": "pms-obc",
+  "scheme_name": "Post-Matric Scholarship for OBC and EBC Students (PMS-OBC)",
+  "state": "central",
+  "issuing_authority": "Ministry of Social Justice and Empowerment, Government of India",
+  "target_group": "OBC, EBC and DNT students pursuing post-matriculation or post-secondary stages of education",
+  "eligibility_rules": [
+    {
+      "id": "category",
+      "description": "Belongs to Other Backward Classes (OBC/BC) or Economically Backward Classes (EBC)",
+      "field": "category",
+      "operator": "in",
+      "value": ["OBC", "BC", "EBC", "DNT"],
+      "source_para": "Clause 4.1"
+    },
+    {
+      "id": "nationality",
+      "description": "Citizen of India",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Clause 4.2"
+    },
+    {
+      "id": "qualification",
+      "description": "Passed matriculation or higher secondary examination",
+      "field": "passed_matriculation",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Clause 5.1"
+    },
+    {
+      "id": "family_income",
+      "description": "Parents' or guardian's total annual income does not exceed Rs 2,50,000 per annum",
+      "field": "family_income_per_year",
+      "operator": "lte",
+      "value": 250000,
+      "source_para": "Clause 5.3"
+    },
+    {
+      "id": "recognised_course",
+      "description": "Enrolled in recognised post-matric degree course at accredited college/university",
+      "field": "course_recognised",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Clause 6.1"
+    },
+    {
+      "id": "no_other_scholarship",
+      "description": "Not holding any other central or state scholarship concurrently",
+      "field": "has_other_scholarship",
+      "operator": "equals",
+      "value": false,
+      "source_para": "Clause 7.2"
+    }
+  ],
+  "benefits": [
+    {
+      "component": "Academic allowance and compulsory non-refundable fees reimbursement",
+      "amount": "Up to Rs 20,000 per annum depending on course group",
+      "amount_per_year": 200000,
+      "duration": "Tenure of degree program",
+      "hostellers": { "Group 1": 10000, "Group 2": 8000, "Group 3": 6000, "Group 4": 5000 },
+      "day_scholars": { "Group 1": 5000, "Group 2": 4500, "Group 3": 3500, "Group 4": 2500 },
+      "instalments": "Direct Benefit Transfer (DBT) to student's Aadhaar-seeded bank account"
+    }
+  ],
+  "required_documents": [
+    "OBC / BC Community Certificate from Tahsildar / MeeSeva",
+    "Income Certificate showing annual family income up to Rs 2.50 lakh",
+    "Aadhaar Card linked to Bank Account (NPCI seeded)",
+    "Class 10 (SSC) and 12 (Intermediate) Marks Memos",
+    "Current Year College Bonafide Certificate & Fee Structure"
+  ],
+  "application_steps": [
+    "Register online at National Scholarship Portal (scholarships.gov.in) or state portal (ePASS)",
+    "Complete Aadhaar Face / Biometric e-KYC authentication",
+    "Fill student profile, enter bank account with active DBT seeding, and select PMS-OBC",
+    "Upload attested certificates and submit for Institute verification"
+  ],
+  "official_portal": "https://scholarships.gov.in",
+  "source_document": "Centrally Sponsored Scheme of Post Matric Scholarship for OBC/EBC/DNT, MoSJE",
+  "source_url": "https://socialjustice.gov.in",
+  "last_verified": "2026-11-06",
+  "guideline_validity": "Active Guideline Framework",
+  "open_items": []
+}

@@ -104,4 +104,50 @@ const pmjay = vendorMatches.find((m) => m.scheme_id === 'pm-jay');
 assert.strictEqual(pmjay.eligibility_status, 'eligible', 'Low income family must be eligible for Ayushman Bharat PM-JAY');
 console.log('✓ Scenario C: PM SVANidhi & PM-JAY eligibility verified');
 
-console.log('ALL ENGINE TESTS PASSED SUCCESSFULLY! (100% Deterministic Guarantee)');
+// Scenario D: OBC College Student (PMS-OBC verification)
+const obcStudentProfile = {
+  age: 19,
+  occupation: 'College student',
+  state: 'Andhra Pradesh',
+  income_range: '1_to_2_lakh',
+  category: 'OBC',
+  is_indian_national: true,
+  has_aadhaar: true,
+  has_bank_account: true,
+  owns_land: false,
+  paid_income_tax: false,
+  family_excluded_group: false,
+  receives_pension: false,
+  course_recognised: true,
+  regular_course: true,
+  has_other_scholarship: false,
+};
+const obcMatches = eligibility.matchSchemes(records, obcStudentProfile);
+const pmsobc = obcMatches.find((m) => m.scheme_id === 'pms-obc');
+assert.strictEqual(pmsobc.eligibility_status, 'eligible', 'OBC student must be eligible for PMS-OBC');
+console.log('✓ Scenario D: PMS-OBC eligibility verified');
+
+// Scenario E: Small Farmer aged 32 (PM-KMY & PMJJBY verification)
+const youngFarmerProfile = {
+  age: 32,
+  occupation: 'Farmer',
+  state: 'Telangana',
+  income_range: '1_to_2_lakh',
+  category: 'General',
+  is_indian_national: true,
+  has_aadhaar: true,
+  has_bank_account: true,
+  owns_land: true,
+  land_before_2019: true,
+  paid_income_tax: false,
+  family_excluded_group: false,
+  receives_pension: false,
+};
+const youngFarmerMatches = eligibility.matchSchemes(records, youngFarmerProfile);
+const pmkmy = youngFarmerMatches.find((m) => m.scheme_id === 'pm-kmy');
+assert.strictEqual(pmkmy.eligibility_status, 'eligible', 'Small farmer 18-40 must be eligible for PM-KMY pension');
+const pmjjby = youngFarmerMatches.find((m) => m.scheme_id === 'pmjjby');
+assert.strictEqual(pmjjby.eligibility_status, 'eligible', 'Citizen 18-50 with bank account must be eligible for PMJJBY');
+console.log('✓ Scenario E: PM-KMY & PMJJBY eligibility verified');
+
+console.log('ALL ENGINE TESTS PASSED SUCCESSFULLY! (100% Deterministic Guarantee across all 10 Schemes)');

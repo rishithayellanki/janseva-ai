@@ -1,0 +1,66 @@
+{
+  "scheme_id": "pmjjby",
+  "scheme_name": "Pradhan Mantri Jeevan Jyoti Bima Yojana (PMJJBY)",
+  "state": "central",
+  "issuing_authority": "Department of Financial Services, Ministry of Finance, Government of India",
+  "target_group": "Individuals aged 18 to 50 years with a bank or post office savings account giving consent for auto-debit",
+  "eligibility_rules": [
+    {
+      "id": "nationality",
+      "description": "Citizen of India",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Rule 1"
+    },
+    {
+      "id": "age_limit",
+      "description": "Age between 18 and 50 years",
+      "field": "age",
+      "operator": "lte",
+      "value": 50,
+      "source_para": "Rule 2"
+    },
+    {
+      "id": "bank_account",
+      "description": "Maintains an operational bank account with Aadhaar linking",
+      "field": "has_bank_account",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Rule 3"
+    },
+    {
+      "id": "has_aadhaar",
+      "description": "Possesses Aadhaar as primary KYC document",
+      "field": "has_aadhaar",
+      "operator": "equals",
+      "value": true,
+      "source_para": "Rule 4"
+    }
+  ],
+  "benefits": [
+    {
+      "component": "Renewable term life insurance cover",
+      "amount": "Rs 2,00,000 payable to nominee on death of member due to any cause",
+      "amount_per_year": 200000,
+      "duration": "Annual renewable (1st June to 31st May)",
+      "instalments": "Nominal premium of Rs 436 per year auto-debited in one instalment"
+    }
+  ],
+  "required_documents": [
+    "Aadhaar Card",
+    "Bank Account Passbook / Cheque Leaf",
+    "Nominee Details (Name, Relationship, Aadhaar)"
+  ],
+  "application_steps": [
+    "Login to your bank's net-banking portal or visit your local branch / post office",
+    "Submit the simple one-page PMJJBY consent-cum-declaration form for auto-debit of Rs 436/year",
+    "Receive instant Certificate of Insurance via SMS/email"
+  ],
+  "official_portal": "https://financialservices.gov.in/beta/en/pmjjby",
+  "source_document": "PMJJBY Scheme Rules, Department of Financial Services",
+  "source_url": "https://jansuraksha.gov.in/Forms-PMJJBY.aspx",
+  "last_verified": "2026-11-06",
+  "guideline_validity": "Active Scheme Framework",
+  "open_items": []
+}

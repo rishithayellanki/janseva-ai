@@ -2,12 +2,15 @@
 // Telugu sentences are drafts for the native-speaker review.
 const SHORT = {
   'pms-sc': 'Post Matric Scholarship for SC students',
+  'pms-obc': 'Post Matric Scholarship for OBC students',
   'pm-usp-csss': 'PM USP college scholarship',
   nmmss: 'NMMSS merit scholarship',
   'pm-kisan': 'PM KISAN',
   pmfby: 'PMFBY crop insurance',
+  'pm-kmy': 'PM Kisan Maan Dhan pension',
   'pm-jay': 'Ayushman Bharat PM JAY',
   'pm-svanidhi': 'PM SVANidhi street vendor loan',
+  pmjjby: 'PM Jeevan Jyoti life insurance',
 };
 
 function names(list) {

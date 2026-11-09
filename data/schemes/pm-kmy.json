@@ -1,0 +1,75 @@
+{
+  "scheme_id": "pm-kmy",
+  "scheme_name": "Pradhan Mantri Kisan Maan Dhan Yojana (PM-KMY)",
+  "state": "central",
+  "issuing_authority": "Department of Agriculture and Farmers Welfare, Ministry of Agriculture and Farmers Welfare, Government of India (Administered by LIC)",
+  "target_group": "Small and marginal farmers (SMFs) aged 18 to 40 years possessing cultivable land up to 2 hectares",
+  "eligibility_rules": [
+    {
+      "id": "nationality",
+      "description": "Citizen of India",
+      "field": "is_indian_national",
+      "operator": "equals",
+      "value": true,
+      "source_para": "1.1"
+    },
+    {
+      "id": "age_bracket",
+      "description": "Age between 18 and 40 years at the time of entry",
+      "field": "age",
+      "operator": "lte",
+      "value": 40,
+      "source_para": "2.1"
+    },
+    {
+      "id": "occupation_farmer",
+      "description": "Occupation is farmer with cultivable landholding",
+      "field": "owns_land",
+      "operator": "equals",
+      "value": true,
+      "source_para": "2.1(a)"
+    },
+    {
+      "id": "no_income_tax",
+      "description": "No family member is an active income tax payer",
+      "field": "paid_income_tax_last_year",
+      "operator": "equals",
+      "value": false,
+      "source_para": "3.1(b)"
+    },
+    {
+      "id": "no_govt_employment",
+      "description": "Not covered under other social security schemes like NPS, ESIC or EPFO",
+      "field": "govt_or_psu_employee_or_retired",
+      "operator": "equals",
+      "value": false,
+      "source_para": "3.1(a)"
+    }
+  ],
+  "benefits": [
+    {
+      "component": "Guaranteed Monthly Old Age Pension",
+      "amount": "Rs 3,000 per month upon reaching 60 years of age",
+      "monthly": 3000,
+      "duration": "Lifelong monthly pension (50% family pension to spouse upon demise)",
+      "instalments": "Direct Benefit Transfer to bank account through Life Insurance Corporation of India (LIC)"
+    }
+  ],
+  "required_documents": [
+    "Aadhaar Card",
+    "Savings Bank Account Passbook (IFSC & Account number)",
+    "Land Ownership Document (Khasra/Khatauni/Pattadar Passbook RoR-1B)"
+  ],
+  "application_steps": [
+    "Visit your nearest Common Service Centre (CSC) or visit maandhan.in",
+    "Provide Aadhaar and bank details for initial auto-debit contribution (Rs 55 to Rs 200/month depending on entry age, with matching 50% central govt contribution)",
+    "Biometric authentication and verification of land record",
+    "Instant issuance of Kisan Pension Card with unique Pension Account Number"
+  ],
+  "official_portal": "https://maandhan.in",
+  "source_document": "PM-KMY Operational Guidelines, Ministry of Agriculture & Farmers Welfare",
+  "source_url": "https://agricoop.nic.in/en/PM-KMY",
+  "last_verified": "2026-11-06",
+  "guideline_validity": "Active National Framework",
+  "open_items": []
+}

@@ -97,12 +97,15 @@ const L = {
 
 const SCHEME_CATEGORIES = {
   'pms-sc': 'edu',
+  'pms-obc': 'edu',
   'pm-usp-csss': 'edu',
   'nmmss': 'edu',
   'pm-kisan': 'agri',
   'pmfby': 'agri',
+  'pm-kmy': 'agri',
   'pm-jay': 'health',
   'pm-svanidhi': 'live',
+  'pmjjby': 'live',
 };
 
 function rupees(n) {
