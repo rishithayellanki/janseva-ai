@@ -49,18 +49,18 @@ export default function HomeView({ language, onStartVoice, onSelectPreset, prese
         </div>
       </section>
 
-      {/* 1-Click DPDP Synthetic Demo Personas */}
+      {/* Citizen Category Pathways */}
       <section className="home-section">
         <div className="section-title-row">
           <div>
-            <h2 className="section-title">⚡ {isTe ? 'డెమో ప్రొఫైల్స్ (సింథటిక్ డేటా)' : 'Quick Demo Personas (DPDP Synthetic Data)'}</h2>
+            <h2 className="section-title">👥 {isTe ? 'పౌరుల వర్గాల వారీగా సంక్షేమ పథకాలు' : 'Explore Welfare by Citizen Category'}</h2>
             <p className="section-subtitle">
               {isTe
-                ? 'ఒక్క క్లిక్‌తో వివిధ వర్గాల పౌరుల అర్హతలను తనిఖీ చేయండి (వీడియో డెమో కోసం ఉపయోగపడుతుంది)'
-                : '1-Click validation of verified welfare journeys across Students, Farmers, and Street Vendors'}
+                ? 'మీ వృత్తి మరియు నేపథ్యం ప్రకారం వర్తించే కేంద్ర మరియు రాష్ట్ర ప్రభుత్వ ప్రయోజనాలను తెలుసుకోండి.'
+                : 'Select your citizen background to explore targeted Central and State welfare entitlements and eligibility requirements.'}
             </p>
           </div>
-          <span className="synthetic-badge">Zero PII • DPDP Act 2023</span>
+          <span className="synthetic-badge">{isTe ? 'ప్రత్యక్ష అర్హత విశ్లేషణ' : 'Direct Eligibility Assessment'}</span>
         </div>
 
         <div className="preset-grid-cards">
@@ -72,7 +72,7 @@ export default function HomeView({ language, onStartVoice, onSelectPreset, prese
               </div>
               <p className="preset-desc">{isTe ? p.description_te : p.description}</p>
               <div className="preset-card-footer">
-                <span className="preset-action">{isTe ? 'తనిఖీ చేయండి →' : 'Evaluate Entitlement →'}</span>
+                <span className="preset-action">{isTe ? 'అర్హతలు చూడండి →' : 'View Matching Schemes →'}</span>
               </div>
             </div>
           ))}

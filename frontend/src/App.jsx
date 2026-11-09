@@ -103,8 +103,8 @@ export default function App() {
           from: 'bot',
           text:
             lang === 'te'
-              ? 'సింథటిక్ డెమో ప్రొఫైల్ లోడ్ అయింది. ఫలితాలు క్రింద చూడండి:'
-              : 'Synthetic demo profile loaded. See your verified results below:',
+              ? 'పౌరుల వివరాలు ధృవీకరించబడ్డాయి. మీ అర్హత గల పథకాల ఫలితాలు క్రింద చూడండి:'
+              : 'Citizen profile verified. Review your statutory scheme entitlements below:',
         },
       ]);
       setActiveTab('results');
@@ -263,22 +263,31 @@ export default function App() {
             <Results sessionId={sessionId} language={language} profile={profile} />
           ) : (
             <div style={{ textAlign: 'center', padding: 48, background: '#fff', borderRadius: 12 }}>
-              <h3>{language === 'te' ? 'ఇంకా ప్రొఫైల్ నమోదు కాలేదు' : 'No active citizen profile found'}</h3>
+              <h3>{language === 'te' ? 'ఇంకా పౌరుల వివరాలు నమోదు కాలేదు' : 'No citizen profile registered yet'}</h3>
               <p style={{ color: '#64748b', margin: '12px 0 20px' }}>
                 {language === 'te'
-                  ? 'దయచేసి వాయిస్ అసిస్టెంట్‌తో ప్రారంభించండి లేదా డెమో ప్రొఫైల్ ఎంచుకోండి.'
-                  : 'Please start with the voice assistant or select a quick demo persona.'}
+                  ? 'మీ అర్హతలను తెలుసుకోవడానికి వాయిస్ అసిస్టెంట్‌తో మాట్లాడండి లేదా వర్గం వారీగా ఎంచుకోండి.'
+                  : 'Start with our Voice Assistant to evaluate your statutory eligibility, or explore a citizen pathway.'}
               </p>
-              <button
-                type="button"
-                className="btn-primary"
-                onClick={() => {
-                  if (presets[0]) loadPreset(presets[0].id);
-                  else startSession(language);
-                }}
-              >
-                {language === 'te' ? 'డెమో ప్రొఫైల్ లోడ్ చేయండి' : 'Load Demo Persona'}
-              </button>
+              <div style={{ display: 'flex', justifyContent: 'center', gap: 12 }}>
+                <button
+                  type="button"
+                  className="btn-primary"
+                  onClick={() => {
+                    startSession(language);
+                    setActiveTab('assistant');
+                  }}
+                >
+                  🎙️ {language === 'te' ? 'వాయిస్ అసిస్టెంట్ ప్రారంభించండి' : 'Start Voice Assistant'}
+                </button>
+                <button
+                  type="button"
+                  className="btn-secondary"
+                  onClick={() => setActiveTab('home')}
+                >
+                  👥 {language === 'te' ? 'వర్గాల వారీగా పథకాలు' : 'Explore Citizen Categories'}
+                </button>
+              </div>
             </div>
           )}
         </div>

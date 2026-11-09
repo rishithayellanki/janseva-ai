@@ -46,15 +46,15 @@ function toWav(buffer) {
   });
 }
 
-// DPDP-compliant Synthetic Demo Personas for Quick Demonstration
+// Citizen Category Pathways for Fast-Track Entitlement Assessment (DPDP-compliant)
 const DEMO_PRESETS = [
   {
     id: 'student-sc',
-    name: 'Ananya (College Student, SC)',
-    name_te: 'అనన్య (కళాశాల విద్యార్థిని, ఎస్సీ)',
-    badge: 'PMS-SC Eligible',
-    description: '20 yrs, College Student, Telangana, Family Income < ₹1L, SC Category, No Land',
-    description_te: '20 సం., కళాశాల విద్యార్థిని, తెలంగాణ, వార్షిక ఆదాయం < ₹1 లక్ష, ఎస్సీ',
+    name: 'College & Higher Education Students',
+    name_te: 'ఉన్నత విద్య & కళాశాల విద్యార్థులు',
+    badge: '🎓 Education Support',
+    description: 'Post-matric and university degree students from low-income families (PMS-SC, PM-USP)',
+    description_te: 'పోస్ట్ మెట్రిక్ ఉన్నత చదువులు చదువుతున్న కళాశాల విద్యార్థుల స్కాలర్‌షిప్ ప్రయోజనాలు',
     profile: {
       age: 20,
       occupation: 'College student',
@@ -75,11 +75,11 @@ const DEMO_PRESETS = [
   },
   {
     id: 'farmer-bc',
-    name: 'Ramesh (Small Farmer, BC)',
-    name_te: 'రమేష్ (సన్నకారు రైతు, బీసీ)',
-    badge: 'PM-KISAN & PMFBY Match',
-    description: '42 yrs, Farmer, Andhra Pradesh, Family Income ₹2-2.5L, Land Owned < 2019',
-    description_te: '42 సం., రైతు, ఆంధ్రప్రదేశ్, వార్షిక ఆదాయం ₹2-2.5 లక్షలు, 2019 ముందు భూమి',
+    name: 'Small & Marginal Landholding Farmers',
+    name_te: 'సన్నకారు & చిన్నకారు రైతులు',
+    badge: '🌾 Agricultural Welfare',
+    description: 'Landholding agricultural families seeking income support and crop insurance (PM-KISAN, PMFBY)',
+    description_te: 'సాగు భూమి ఉన్న రైతు కుటుంబాల పెట్టుబడి సహాయం & పంట నష్టపరిహార పథకాలు',
     profile: {
       age: 42,
       occupation: 'Farmer',
@@ -98,11 +98,11 @@ const DEMO_PRESETS = [
   },
   {
     id: 'school-bc',
-    name: 'Kavitha (School Student, Govt School)',
-    name_te: 'కవిత (ప్రభుత్వ పాఠశాల విద్యార్థిని)',
-    badge: 'NMMSS Match',
-    description: '14 yrs, School Student, Govt School, Telangana, Income ₹1-2L',
-    description_te: '14 సం., ప్రభుత్వ పాఠశాల విద్యార్థిని, తెలంగాణ, వార్షిక ఆదాయం ₹1-2 లక్షలు',
+    name: 'Secondary School Students (Govt School)',
+    name_te: 'ప్రభుత్వ పాఠశాల విద్యార్థులు',
+    badge: '🎒 School Merit Aid',
+    description: 'Students in Classes 8-12 in Government/Local Body schools (NMMSS National Merit Aid)',
+    description_te: 'ప్రభుత్వ పాఠశాలల్లో 8-12 తరగతులు చదువుతున్న విద్యార్థుల జాతీయ మెరిట్ స్కాలర్‌షిప్',
     profile: {
       age: 14,
       occupation: 'School student',
@@ -122,11 +122,11 @@ const DEMO_PRESETS = [
   },
   {
     id: 'vendor-se',
-    name: 'Lakshmi (Street Vendor / Self-Employed)',
-    name_te: 'లక్ష్మి (చిరు వ్యాపారి / స్వయం ఉపాధి)',
-    badge: 'PM SVANidhi & PM-JAY Match',
-    description: '36 yrs, Self-employed, Telangana, Income ₹1-2L, Urban Micro-credit',
-    description_te: '36 సం., స్వయం ఉపాధి, తెలంగాణ, వార్షిక ఆదాయం ₹1-2 లక్షలు',
+    name: 'Street Vendors & Micro-Entrepreneurs',
+    name_te: 'చిరు వ్యాపారులు & స్వయం ఉపాధి',
+    badge: '💼 Livelihood & MSME',
+    description: 'Urban street vendors and self-employed individuals seeking micro-credit & health cover',
+    description_te: 'పట్టణ చిరు వ్యాపారులు, స్వయం ఉపాధి మరియు ఉచిత ఆరోగ్య సంరక్షణ పథకాలు',
     profile: {
       age: 36,
       occupation: 'Self-employed',
@@ -144,11 +144,11 @@ const DEMO_PRESETS = [
   },
   {
     id: 'farmer-kmy',
-    name: 'Narayana (Marginal Farmer, 34 yrs)',
-    name_te: 'నారాయణ (చిన్నకారు రైతు, 34 సం.)',
-    badge: 'PM-KMY, PM-KISAN & PMJJBY',
-    description: '34 yrs, Farmer, Telangana, Family Income ₹1-2L, Land Owned < 2019',
-    description_te: '34 సం., రైతు, తెలంగాణ, వార్షిక ఆదాయం ₹1-2 లక్షలు, భూమి హక్కుదారు',
+    name: 'Young Farmers & Social Security',
+    name_te: 'యువ రైతులు & సామాజిక భద్రత',
+    badge: '🛡️ Pension & Life Cover',
+    description: 'Small farmers aged 18-40 seeking monthly social security pension and life cover (PM-KMY, PMJJBY)',
+    description_te: '18-40 ఏళ్ల చిన్నకారు రైతుల వృద్ధాప్య పెన్షన్ మరియు జీవిత బీమా రక్షణ',
     profile: {
       age: 34,
       occupation: 'Farmer',
