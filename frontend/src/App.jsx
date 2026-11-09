@@ -1,4 +1,5 @@
 import Results from './Results';
+import SpeakButton from './SpeakButton';
 import { useEffect, useRef, useState } from 'react';
 
 const API = 'http://localhost:4000';
@@ -221,6 +222,7 @@ export default function App() {
                 }}>
                   {m.text}
                 </span>
+                {m.from === 'bot' && <SpeakButton text={m.text} language={language} />}
               </div>
             ))}
             <div ref={endRef} />

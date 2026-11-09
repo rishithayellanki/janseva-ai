@@ -110,6 +110,8 @@ app.get('/api/sessions/:id/matches', (req, res) => {
   res.json({ profile, matches: eligibility.matchSchemes(records, profile) });
 });
 
+require('./tts')(app);
+
 // Speech to text through Gnani Prisma v3.0. The API key never leaves the backend.
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
   const lang = req.body.language === 'te' ? 'te' : 'en';

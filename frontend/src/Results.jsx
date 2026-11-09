@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import SpeakButton from './SpeakButton';
+import { summaryText } from './summary';
 
 const API = 'http://localhost:4000';
 
@@ -8,6 +10,7 @@ const L = {
     title: 'Your scheme results',
     indicative: 'These results are indicative. Confirm eligibility on the official portal before you apply.',
     loading: 'Checking schemes for you...',
+    retry: 'Try again',
     error: 'Could not load scheme results. Is the backend running?',
     status: { eligible: 'Eligible', needs_more_information: 'Needs more information', not_eligible: 'Not eligible' },
     aishe: ' (subject to your institution having a valid AISHE code)',
@@ -33,6 +36,7 @@ const L = {
     title: 'మీ పథకాల ఫలితాలు',
     indicative: 'ఈ ఫలితాలు సూచనాత్మకం మాత్రమే. దరఖాస్తు చేసే ముందు అధికారిక పోర్టల్‌లో అర్హతను నిర్ధారించుకోండి.',
     loading: 'మీ కోసం పథకాలను పరిశీలిస్తున్నాము...',
+    retry: 'మళ్లీ ప్రయత్నించండి',
     error: 'ఫలితాలను లోడ్ చేయలేకపోయాము. బ్యాకెండ్ నడుస్తోందా?',
     status: { eligible: 'అర్హులు', needs_more_information: 'మరింత సమాచారం అవసరం', not_eligible: 'అర్హులు కాదు' },
     aishe: ' (మీ సంస్థకు చెల్లుబాటు అయ్యే AISHE కోడ్ ఉండాలి)',
@@ -113,15 +117,24 @@ export default function Results({ sessionId, language = 'en' }) {
   const [matches, setMatches] = useState(null);
   const [error, setError] = useState(false);
   const [open, setOpen] = useState({});
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
+    setError(false);
     fetch(`${API}/api/sessions/${sessionId}/matches`)
       .then((r) => (r.ok ? r.json() : Promise.reject(new Error('bad response'))))
       .then((data) => setMatches(data.matches))
       .catch(() => setError(true));
-  }, [sessionId]);
+  }, [sessionId, attempt]);
 
-  if (error) return <p>{t.error}</p>;
+  if (error) {
+    return (
+      <div>
+        <p>{t.error}</p>
+        <button type="button" onClick={() => setAttempt((n) => n + 1)}>{t.retry}</button>
+      </div>
+    );
+  }
   if (!matches) return <p>{t.loading}</p>;
 
   return (
@@ -129,6 +142,7 @@ export default function Results({ sessionId, language = 'en' }) {
       <h2>{t.title}</h2>
       <p style={{ fontSize: 13, color: '#555' }}>{t.indicative}</p>
       {t.textNote && <p style={{ fontSize: 13, color: '#555' }}>{t.textNote}</p>}
+      <SpeakButton text={summaryText(matches, language)} language={language === 'te' ? 'auto' : 'en'} />
 
       {matches.map((m) => (
         <div key={m.scheme_id} style={{ border: '1px solid #ddd', borderRadius: 8, padding: 12, margin: '12px 0' }}>

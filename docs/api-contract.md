@@ -124,3 +124,7 @@ The profile stores `income_range` with one of six fixed values:
 - 2_5_to_3_5_lakh
 - 3_5_to_4_5_lakh
 - above_4_5_lakh
+
+## Day 4: spoken replies
+- POST /api/speak  body {"text": "...", "language": "en" | "te" | "auto"}  returns audio/wav (Gnani Timbre v3.0, voice Lakshmi)
+  Errors: 400 no_text, 413 text_too_long, 502 speech_unavailable. Requests are queued: Gnani allows one active request at a time.
