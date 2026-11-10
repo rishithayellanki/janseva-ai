@@ -52,6 +52,62 @@ A voice-first welfare assistant built on Gnani's sovereign Indic stack:
 
 No hallucinations: 100% deterministic verification against official Ministry Gazette guidelines.
 
+GitHub: https://github.com/rishithayellanki/janseva-ai
 Watch the 60s demo! 👇
 #GreatIndianAIInternshipChallenge #GnaniAI
 ```
+
+---
+
+## 3. YouTube (Video & Shorts) Upload Kit
+
+### A. Recommended Video Titles (Choose One):
+- **Option 1 (Best for Shorts & Virality)**:
+  `JanSeva AI — Sovereign Voice-First Welfare Assistant for India 🇮🇳 | Gnani AI Challenge #Shorts`
+- **Option 2 (Official & Technical)**:
+  `Building Sovereign AI for India: JanSeva AI (జనసేవ AI) | The Great Indian AI Internship Challenge`
+- **Option 3 (Problem-Solving Angle)**:
+  `How Indic Voice AI Unlocks Government Welfare for 800M Citizens — JanSeva AI (Gnani AI)`
+
+### B. YouTube Description (Copy-Paste Ready):
+```markdown
+🇮🇳 JanSeva AI (జనసేవ AI) — Sovereign Voice-First Welfare Assistant for India
+Built for The Great Indian AI Internship Challenge by Gnani.ai
+
+Over 800 million Indian citizens are entitled to Central and State government welfare schemes, but millions miss out due to language barriers, bureaucratic jargon, and digital illiteracy. 
+
+JanSeva AI bridges this gap using Gnani AI's Sovereign Indic AI Stack coupled with a 100% deterministic eligibility engine verified against official Ministry Gazette notifications.
+
+🌟 Core Sovereign AI Stack:
+🎙️ Speech-to-Text: Gnani Prisma v3.0 (Real-time Telugu-English code-mixed speech recognition)
+🔊 Text-to-Speech: Gnani Timbre v3.0 (Lakshmi voice model with native Indian numeral & lakh/crore cadence)
+💡 Reasoning & Advisory: Gnani Evon v3.3 (Grounded legal counselor & MeeSeva document procurement guidance)
+⚖️ Policy Engine: Deterministic relational logic with zero hallucinations across 10 statutory schemes
+🔒 Privacy: 100% DPDP Act (2023) compliant with zero storage of personal citizen PII
+
+⏱️ Video Chapters:
+0:00 - Introduction & Sovereign Mission
+0:08 - Real-Time Code-Mixed Telugu Voice Input (Gnani Prisma v3.0)
+0:18 - Zero-Hallucination Gazette Eligibility Engine (10 Schemes)
+0:32 - Grounded Legal Counseling & Voice Playback (Evon v3.3 & Timbre v3.0)
+0:45 - MeeSeva Document Route & Printable Citizen Welfare Slip
+0:54 - Gnani AI Studio Technical Diagnostics & Outro
+
+🔗 Links:
+• GitHub Repository: https://github.com/rishithayellanki/janseva-ai
+• Challenge Details: https://www.gnani.ai/internship
+• Developer: Rishitha Yellanki
+
+#GreatIndianAIInternshipChallenge #GnaniAI #SovereignAI #IndiaAI #BuildForIndia #VoiceAI #ArtificialIntelligence #IndicAI #TechForGood #Shorts
+```
+
+### C. YouTube Tags (Copy-Paste into Video Tags Box):
+```
+Gnani AI, Great Indian AI Internship Challenge, JanSeva AI, Sovereign AI India, Prisma v3, Timbre v3, Evon v3, Indic AI, Voice AI, Telugu Speech to Text, AI for Bharat, Government Schemes AI, Digital Public Infrastructure, DPDP Act 2023, Generative AI India
+```
+
+### D. Thumbnail Text Concept:
+- **Main Text**: `ZERO-HALLUCINATION WELFARE AI 🇮🇳`
+- **Sub-Text**: `Powered by Gnani Prisma, Timbre & Evon`
+- **Visuals**: Screenshot of JanSeva AI tricolor portal + waveform + scheme cards.
+
