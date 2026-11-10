@@ -154,12 +154,9 @@ janseva-ai/
 │   └── schemes/               # Verified Gazette records (JSON)
 ├── docs/
 │   ├── architecture.md        # System architecture & Mermaid flowcharts
-│   ├── interview-prep.md      # 15 technical interview questions & answers
-│   ├── demo-video-script.md   # 60-second video demo script & storyboard
-│   ├── social-media-post.md   # High-impact post copy for LinkedIn & X
-│   ├── scope.md               # Scope and roadmap
-│   ├── api-contract.md        # API specification
-│   └── gnani-integration.md   # Gnani STT & TTS integration logs
+│   ├── scope.md               # Scope and architectural roadmap
+│   ├── api-contract.md        # API specification & endpoints
+│   └── gnani-integration.md   # Gnani STT & TTS integration documentation
 ├── test-tts.wav               # Real Gnani Timbre audio fixture
 ├── test.m4a                   # Telugu-English test recording
 └── README.md
@@ -173,4 +170,4 @@ janseva-ai/
 - [x] Zero-hallucination deterministic welfare eligibility verified against Ministry Gazettes.
 - [x] DPDP Act 2023 privacy compliant (Zero citizen PII, ephemeral audio processing).
 - [x] 100% automated test coverage across all 10 schemes and Evon reasoning.
-- [x] 60-second video demo script & social media launch assets prepared.
+- [x] Production-grade documentation and system architecture.
